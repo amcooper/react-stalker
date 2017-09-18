@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import sightings from './sightings.json';
 
 function Form(props) {
   return (
@@ -13,7 +14,7 @@ function Form(props) {
 function Stalk(props) {
   return (
     <div>
-      STALK {this.props.id}
+      STALK { props.id }
     </div>
   )
 }
@@ -40,8 +41,8 @@ class App extends Component {
       <div className="App">
         <Form />
         <div>
-	  ({ this.state.list } ? <StalkList /> : <Stalk id={ this.state.id } />) 
-	</div>
+	        { this.state.list ? <StalkList /> : <Stalk id={ this.state.id } /> } 
+	      </div>
       </div>
     );
   }

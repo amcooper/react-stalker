@@ -1,0 +1,36 @@
+[{
+	"id": 0,
+	"celeb": "Connie Mack",
+	"stalker": "Bella",
+	"dateTime": "May 22, 2017 17:09",
+	"location": "Bar Tabac",
+	"comment": "Looking great, Senator!"
+}, {
+	"id": 1,
+	"celeb": "Ryan Gosling",
+	"stalker": "Caroline",
+	"dateTime": "May 24, 2017 12:59",
+	"location": "Bar Pitti",
+	"comment": "Hey gurl"
+}, {
+	"id": 2,
+	"celeb": "Morgan Fairchild",
+	"stalker": "Daphne",
+	"dateTime": "May 26, 2017 13:09",
+	"location": "CVS on Herkimer",
+	"comment": "I'll have what she's having"
+}, {
+	"id": 3,
+	"celeb": "Michelle Alexander",
+	"stalker": "Eleanor",
+	"dateTime": "May 26, 2017 12:09",
+	"location": "Whole Foods Chelsea",
+	"comment": "Engaged in polite conversation"
+}, {
+	"id": 4,
+	"celeb": "Lauren Poitras",
+	"stalker": "Eleanor",
+	"dateTime": "May 27, 2017 08:08",
+	"location": "Whole Foods Chelsea",
+	"comment": "This Whole Foods is fire"
+}]
