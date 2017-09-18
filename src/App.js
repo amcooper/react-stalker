@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function Form {
+function Form(props) {
   return (
     <div>
       FORM
@@ -18,7 +18,7 @@ function Stalk(props) {
   )
 }
 
-function StalkList {
+function StalkList(props) {
   return (
     <div>
       STALKLIST
@@ -40,7 +40,7 @@ class App extends Component {
       <div className="App">
         <Form />
         <div>
-	  this.state.list ? <StalkList /> : <Stalk id=this.state.id />
+	  ({ this.state.list } ? <StalkList /> : <Stalk id={ this.state.id } />) 
 	</div>
       </div>
     );
