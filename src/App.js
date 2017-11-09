@@ -82,15 +82,15 @@ class App extends Component {
   }
   
   resetForm() {
-    this.setState(
-      {formValues: {
+    this.setState({
+      formValues: {
         celeb: '',
         stalker: '',
         dateTime: '',
         location: '',
         comment: ''
       }
-      });
+    });
   }
   
   handleSubmit(event) {
