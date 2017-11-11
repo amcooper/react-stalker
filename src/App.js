@@ -5,12 +5,13 @@ import config from './config.js';
 
 class Form extends Component {
 // this should be a controlled component, more like the guide
-  constructor(props) {
-    super(props);
-  }
+
+// this may be a 'useless constructor'
+  // constructor(props) {
+  //   super(props);
+  // }
   
-  handleChange(){
-      
+  handleChange(){      
   }
   
   render() {
@@ -19,18 +20,23 @@ class Form extends Component {
         <label>
           Celebrity: <input type="text" value={this.props.formValues.celeb} />
         </label>
+        <br />
         <label>
           Stalker: <input type="text" value={this.props.formValues.stalker} />
         </label>
+        <br />
         <label>
           Date and time: <input type="datetime-local" value={this.props.formValues.dateTime} />
         </label>
+        <br />
         <label>
           Location: <input type="text" value={this.props.formValues.location} />
         </label>
+        <br />
         <label>
           Comment: <textarea value={this.props.formValues.comment} />
         </label>
+        <br />
         <input type="submit" value="Submit" />
       </form>
     )
@@ -48,7 +54,7 @@ function Stalk(props) {
 function StalkListItem( props ) {
   return (
     <div>
-      <p>{ props.item.celeb } on { props.item.dateTime }</p>
+      <p>{ props.item.celebrity } on { props.item.date }</p>
     </div>
   )
 }
@@ -70,7 +76,7 @@ class App extends Component {
     this.state = {
       list: true,
       id: 0,
-      // sightings: this.getSightings(),
+      sightings: [],
       formValues: {
         celeb: '',
         stalker: '',
@@ -82,8 +88,20 @@ class App extends Component {
   }
   
   getSightings() {
-    fetch( config.apiURL )
-      .then( res => { return res.json(); })
+    fetch( config.apiURL, { mode: 'cors' })
+      .then( res => { 
+        if (res.status !== 200) {
+          console.error( `HTTP status code: ${res.status}` );
+          return;
+        }
+
+        res.json()
+          .then( data => {
+            console.info( data );
+            this.setState({ sightings: data });
+          })
+          .catch( e_res => console.error( e_res.stack ));
+      })
       .catch( e => console.error( e.stack ));
   }
 
@@ -105,19 +123,21 @@ class App extends Component {
     this.setState({sightings: newSightings});
     // probably can reset form values here
     this.resetForm();
-    event.preventDefault;
+    event.preventDefault();
   }
   		
   render() {
-    const sightings = this.getSightings();
-    // const item = this.getSightings().find( (sighting) =>
-      // sighting.id === this.state.id
-    // )
+    this.getSightings();
+    let item = this.state.sightings.find((sighting) =>
+          sighting.id === this.state.id
+        );
+
+    console.info( item );
+
     return (
       <div className="App">
         <Form formValues={ this.state.formValues } handleSubmit={ this.handleSubmit } />
-        <Stalk item={ item } />
-        <StalkList sightings={sightings} /> 
+        <StalkList sightings={this.state.sightings} /> 
       </div>
     );
   }
