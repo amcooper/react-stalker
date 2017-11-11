@@ -6,19 +6,36 @@ import config from './config.js';
 class Form extends Component {
 // this should be a controlled component, more like the guide
 
-// this may be a 'useless constructor'
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      sightings: {
+        celebrity: '',
+        stalker: '',
+        date: null,
+        location: '',
+        comment: ''
+      }
+    };
+
+    this.handleChange = this.handleChange.bind( this );
+  }
   
-  handleChange(){      
+  handleChange( event ) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
   
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
         <label>
-          Celebrity: <input type="text" value={this.props.formValues.celeb} />
+          Celebrity: <input type="text" value={this.props.formValues.celebrity} />
         </label>
         <br />
         <label>
@@ -26,7 +43,7 @@ class Form extends Component {
         </label>
         <br />
         <label>
-          Date and time: <input type="datetime-local" value={this.props.formValues.dateTime} />
+          Date and time: <input type="datetime-local" value={this.props.formValues.date} />
         </label>
         <br />
         <label>
@@ -46,7 +63,7 @@ class Form extends Component {
 function Stalk(props) {
   return (
     <div>
-      <p>{ props.item.celeb } - { props.item.stalker } - { props.item.dateTime } - { props.item.location } - { props.item.comment }</p>
+      <p>{ props.item.celebrity } - { props.item.stalker } - { props.item.date } - { props.item.location } - { props.item.comment }</p>
     </div>
   )
 }
@@ -78,9 +95,9 @@ class App extends Component {
       id: 0,
       sightings: [],
       formValues: {
-        celeb: '',
+        celebrity: '',
         stalker: '',
-        dateTime: '',
+        date: '',
         location: '',
         comment: ''
       }
@@ -99,6 +116,7 @@ class App extends Component {
           .then( data => {
             console.info( data );
             this.setState({ sightings: data });
+            return;
           })
           .catch( e_res => console.error( e_res.stack ));
       })
@@ -108,9 +126,9 @@ class App extends Component {
   resetForm() {
     this.setState({
       formValues: {
-        celeb: '',
+        celebrity: '',
         stalker: '',
-        dateTime: '',
+        date: '',
         location: '',
         comment: ''
       }
