@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import sightings from './sightings.json';
+// import sightings from './sightings.json';
 
 class Form extends Component {
 // this should be a controlled component, more like the guide
@@ -15,21 +15,21 @@ class Form extends Component {
   
   render() {
     return (
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={this.props.handleSubmit}>
         <label>
-          Celebrity: <input type="text" value={props.formValues.celeb} />
+          Celebrity: <input type="text" value={this.props.formValues.celeb} />
         </label>
         <label>
-          Stalker: <input type="text" value={props.formValues.stalker} />
+          Stalker: <input type="text" value={this.props.formValues.stalker} />
         </label>
         <label>
-          Date and time: <input type="datetime-local" value={props.formValues.dateTime} />
+          Date and time: <input type="datetime-local" value={this.props.formValues.dateTime} />
         </label>
         <label>
-          Location: <input type="text" value={props.formValues.location} />
+          Location: <input type="text" value={this.props.formValues.location} />
         </label>
         <label>
-          Comment: <textarea value={props.formValues.comment} />
+          Comment: <textarea value={this.props.formValues.comment} />
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -70,7 +70,7 @@ class App extends Component {
     this.state = {
       list: true,
       id: 0,
-      sightings: sightings,
+      sightings: [],
       formValues: {
         celeb: '',
         stalker: '',
@@ -99,13 +99,23 @@ class App extends Component {
     this.setState({sightings: newSightings});
     // probably can reset form values here
     this.resetForm();
-    event.preventDefault;
+    event.preventDefault();
+  }
+
+  componentDidMount() {
+    fetch( 'sightings.json' )
+      .then(( response ) => { return response.json(); })
+      .then(( data ) => { 
+        // console.log( data, '***' );
+        this.setState({ sightings: data }); 
+        // return 
+      });
   }
   		
   render() {
-    const item = this.state.sightings.find( (sighting) =>
-      sighting.id === this.state.id
-    )
+    const item = this.state.sightings.find(( sighting ) => sighting.id === this.state.id );
+
+    console.info( this.state.id, this.state.sightings, item ); // debug
     return (
       <div className="App">
         <Form formValues={ this.state.formValues } handleSubmit={ this.handleSubmit } />
