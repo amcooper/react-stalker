@@ -106,19 +106,17 @@ class App extends Component {
   
   getSightings() {
     fetch( config.apiURL, { mode: 'cors' })
-      .then( res => { 
+      .then(( res ) => { 
         if (res.status !== 200) {
           console.error( `HTTP status code: ${res.status}` );
           return;
         }
 
-        res.json()
-          .then( data => {
-            console.info( data );
-            this.setState({ sightings: data });
-            return;
-          })
-          .catch( e_res => console.error( e_res.stack ));
+        return res.json()
+      })
+      .then(( json ) => {
+        console.info( json ); // debug
+        this.setState({ sightings: json });
       })
       .catch( e => console.error( e.stack ));
   }
@@ -143,9 +141,12 @@ class App extends Component {
     this.resetForm();
     event.preventDefault();
   }
-  		
-  render() {
+  
+  componentDidMount() {
     this.getSightings();
+  }	
+
+  render() {
     let item = this.state.sightings.find((sighting) =>
           sighting.id === this.state.id
         );
@@ -155,6 +156,7 @@ class App extends Component {
     return (
       <div className="App">
         <Form formValues={ this.state.formValues } handleSubmit={ this.handleSubmit } />
+        
         <StalkList sightings={this.state.sightings} /> 
       </div>
     );
