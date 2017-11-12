@@ -92,7 +92,7 @@ class App extends Component {
     super();
     this.state = {
       list: true,
-      id: 0,
+      id: 19,
       sightings: [],
       formValues: {
         celebrity: '',
@@ -156,7 +156,7 @@ class App extends Component {
     return (
       <div className="App">
         <Form formValues={ this.state.formValues } handleSubmit={ this.handleSubmit } />
-        
+        { item !== undefined && <Stalk item={ item } /> }
         <StalkList sightings={this.state.sightings} /> 
       </div>
     );
