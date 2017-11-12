@@ -9,16 +9,15 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sightings: {
-        celebrity: '',
-        stalker: '',
-        date: null,
-        location: '',
-        comment: ''
-      }
+      celebrity: '',
+      stalker: '',
+      date: '',
+      location: '',
+      comment: ''
     };
 
     this.handleChange = this.handleChange.bind( this );
+    this.handleSubmit = this.handleSubmit.bind( this );    
   }
   
   handleChange( event ) {
@@ -31,27 +30,46 @@ class Form extends Component {
     });
   }
   
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log('Handle submit here');
+    // fetch(apiURL, submitInit); // POST to API
+    // this.setState({sightings: newSightings});
+    // probably can reset form values here
+    this.resetForm();
+  }
+  
+  resetForm() {
+    this.setState({
+      celebrity: '',
+      stalker: '',
+      date: '',
+      location: '',
+      comment: ''
+    });
+  }
+
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <label>
-          Celebrity: <input type="text" value={this.props.formValues.celebrity} />
+          Celebrity: <input type="text" name="celebrity" value={this.state.celebrity} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Stalker: <input type="text" value={this.props.formValues.stalker} />
+          Stalker: <input type="text" name="stalker" value={this.state.stalker} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Date and time: <input type="datetime-local" value={this.props.formValues.date} />
+          Date and time: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Location: <input type="text" value={this.props.formValues.location} />
+          Location: <input type="text" name="location" value={this.state.location} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Comment: <textarea value={this.props.formValues.comment} />
+          Comment: <textarea name="comment" value={this.state.comment} onChange={this.handleChange} />
         </label>
         <br />
         <input type="submit" value="Submit" />
@@ -93,14 +111,14 @@ class App extends Component {
     this.state = {
       list: true,
       id: 19,
-      sightings: [],
-      formValues: {
-        celebrity: '',
-        stalker: '',
-        date: '',
-        location: '',
-        comment: ''
-      }
+      sightings: []
+      // formValues: {
+      //   celebrity: '',
+      //   stalker: '',
+      //   date: '',
+      //   location: '',
+      //   comment: ''
+      // }
     }
   }
   
@@ -121,26 +139,17 @@ class App extends Component {
       .catch( e => console.error( e.stack ));
   }
 
-  resetForm() {
-    this.setState({
-      formValues: {
-        celebrity: '',
-        stalker: '',
-        date: '',
-        location: '',
-        comment: ''
-      }
-    });
-  }
-  
-  handleSubmit(event) {
-    const newSightings = this.state.sightings.slice();
-    newSightings.push(event.target);
-    this.setState({sightings: newSightings});
-    // probably can reset form values here
-    this.resetForm();
-    event.preventDefault();
-  }
+  // resetForm() {
+  //   this.setState({
+  //     formValues: {
+  //       celebrity: '',
+  //       stalker: '',
+  //       date: '',
+  //       location: '',
+  //       comment: ''
+  //     }
+  //   });
+  // }
   
   componentDidMount() {
     this.getSightings();
@@ -155,7 +164,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Form formValues={ this.state.formValues } handleSubmit={ this.handleSubmit } />
+        <Form />
         { item !== undefined && <Stalk item={ item } /> }
         <StalkList sightings={this.state.sightings} /> 
       </div>
