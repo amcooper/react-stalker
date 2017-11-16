@@ -17,9 +17,9 @@ class Form extends Component {
     };
 
     this.handleChange = this.handleChange.bind( this );
-    this.handleSubmit = this.handleSubmit.bind( this );    
+    this.handleSubmit = this.handleSubmit.bind( this );
   }
-  
+
   handleChange( event ) {
     const target = event.target;
     const value = target.value;
@@ -29,16 +29,37 @@ class Form extends Component {
       [name]: value
     });
   }
-  
+
   handleSubmit(event) {
+    // let data = new FormData();
+    let data = new URLSearchParams();
+    data.append('celebrity', this.state.celebrity);
+    data.append('stalker', this.state.stalker);
+    data.append('date', this.state.date);
+    data.append('location', this.state.location);
+    data.append('comment', this.state.comment);
+    console.info(data);
+
     event.preventDefault();
     console.log('Handle submit here');
-    // fetch(apiURL, submitInit); // POST to API
-    // this.setState({sightings: newSightings});
-    // probably can reset form values here
-    this.resetForm();
+
+    fetch(config.apiURL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+      },
+      body: data,
+      mode: 'cors'
+    })
+    .then((res) => {
+      this.resetForm();
+      this.props.getSightings();
+      return res.json();
+    })
+    .catch((e) => {console.error(e.stack); });
   }
-  
+
   resetForm() {
     this.setState({
       celebrity: '',
@@ -51,7 +72,7 @@ class Form extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form id='input-form' onSubmit={this.handleSubmit}>
         <label>
           Celebrity: <input type="text" name="celebrity" value={this.state.celebrity} onChange={this.handleChange} />
         </label>
@@ -120,11 +141,12 @@ class App extends Component {
       //   comment: ''
       // }
     }
+    this.getSightings = this.getSightings.bind( this ); // debug
   }
-  
+
   getSightings() {
     fetch( config.apiURL, { mode: 'cors' })
-      .then(( res ) => { 
+      .then(( res ) => {
         if (res.status !== 200) {
           console.error( `HTTP status code: ${res.status}` );
           return;
@@ -133,7 +155,7 @@ class App extends Component {
         return res.json()
       })
       .then(( json ) => {
-        console.info( json ); // debug
+        console.log('GET req'); // debug
         this.setState({ sightings: json });
       })
       .catch( e => console.error( e.stack ));
@@ -150,23 +172,23 @@ class App extends Component {
   //     }
   //   });
   // }
-  
+
   componentDidMount() {
     this.getSightings();
-  }	
+  }
 
   render() {
     let item = this.state.sightings.find((sighting) =>
           sighting.id === this.state.id
         );
 
-    console.info( item );
+    // console.info( item );
 
     return (
       <div className="App">
-        <Form />
+        <Form getSightings={this.getSightings} />
         { item !== undefined && <Stalk item={ item } /> }
-        <StalkList sightings={this.state.sightings} /> 
+        <StalkList sightings={this.state.sightings} />
       </div>
     );
   }
