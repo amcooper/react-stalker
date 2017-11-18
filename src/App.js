@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-// import sightings from './sightings.json';
 import config from './config.js';
 
 class Form extends Component {
-// this should be a controlled component, more like the guide
 
   constructor(props) {
     super(props);
@@ -31,7 +29,6 @@ class Form extends Component {
   }
 
   handleSubmit(event) {
-    // let data = new FormData();
     let data = new URLSearchParams();
     data.append('celebrity', this.state.celebrity);
     data.append('stalker', this.state.stalker);
@@ -117,8 +114,14 @@ function StalkListItem( props ) {
 
 function StalkList(props) {
   const itemList = props.sightings.map( (sighting) =>
+    // <li key={ sighting.id } onClick={this.handleClick}><StalkListItem item={sighting} /></li>
     <li key={ sighting.id }><StalkListItem item={sighting} /></li>
   );
+
+  // function handleClick( event ) {
+  //   console.info( event.target ); // debug
+  // }
+
   return (
     <ul>
       { itemList }
@@ -133,15 +136,9 @@ class App extends Component {
       list: true,
       id: 19,
       sightings: []
-      // formValues: {
-      //   celebrity: '',
-      //   stalker: '',
-      //   date: '',
-      //   location: '',
-      //   comment: ''
-      // }
     }
-    this.getSightings = this.getSightings.bind( this ); // debug
+    this.getSightings = this.getSightings.bind( this );
+    this.pickItem = this.pickItem.bind( this );
   }
 
   getSightings() {
@@ -161,17 +158,9 @@ class App extends Component {
       .catch( e => console.error( e.stack ));
   }
 
-  // resetForm() {
-  //   this.setState({
-  //     formValues: {
-  //       celebrity: '',
-  //       stalker: '',
-  //       date: '',
-  //       location: '',
-  //       comment: ''
-  //     }
-  //   });
-  // }
+  pickItem( id ) {
+    this.setState({ id: id });
+  }
 
   componentDidMount() {
     this.getSightings();
@@ -188,7 +177,7 @@ class App extends Component {
       <div className="App">
         <Form getSightings={this.getSightings} />
         { item !== undefined && <Stalk item={ item } /> }
-        <StalkList sightings={this.state.sightings} />
+        <StalkList sightings={this.state.sightings} pickItem={this.pickItem} />
       </div>
     );
   }
