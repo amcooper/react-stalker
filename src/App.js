@@ -99,7 +99,7 @@ class Form extends Component {
 function Stalk(props) {
   return (
     <div>
-      <p>{ props.item.celebrity } - { props.item.stalker } - { props.item.date } - { props.item.location } - { props.item.comment }</p>
+      <p><button onClick={() => props.onDelete( props.item.id )}>delete</button> { props.item.celebrity } - { props.item.stalker } - { props.item.date } - { props.item.location } - { props.item.comment }</p>
     </div>
   )
 }
@@ -135,6 +135,7 @@ class App extends Component {
     }
     this.getSightings = this.getSightings.bind( this );
     this.handleClick = this.handleClick.bind( this );
+    this.deleteItem = this.deleteItem.bind( this );
   }
 
   getSightings() {
@@ -159,6 +160,24 @@ class App extends Component {
     this.setState({ id: id });
   }
 
+  deleteItem( id ) {
+    fetch( `${config.apiURL}/${id}`, {
+      method: 'DELETE',
+      mode: 'cors'
+    })
+      .then(( res ) => {
+        if (res.status !== 200) {
+          console.error( `HTTP status code: ${res.status}` );
+          return;
+        }
+        this.setState({ id: null });
+        this.getSightings();
+        // return res.json();
+      })
+      .catch( e => console.error( e.stack ));
+      // .then(( res ))
+  }
+
   componentDidMount() {
     this.getSightings();
   }
@@ -171,7 +190,7 @@ class App extends Component {
     return (
       <div className="App">
         <Form getSightings={this.getSightings} />
-        { item !== undefined && <Stalk item={ item } /> }
+        { item !== undefined && <Stalk item={ item } onDelete={( id ) => this.deleteItem( id )} /> }
         <StalkList sightings={this.state.sightings} onClick={( id ) => this.handleClick( id )} />
       </div>
     );
