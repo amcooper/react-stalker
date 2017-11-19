@@ -106,39 +106,35 @@ function Stalk(props) {
 
 function StalkListItem( props ) {
   return (
-    <div>
+    <div onClick={() => props.onClick()}>
       <p>{ props.item.celebrity } on { props.item.date }</p>
     </div>
   )
 }
 
-function StalkList(props) {
-  const itemList = props.sightings.map( (sighting) =>
-    // <li key={ sighting.id } onClick={this.handleClick}><StalkListItem item={sighting} /></li>
-    <li key={ sighting.id }><StalkListItem item={sighting} /></li>
-  );
+class StalkList extends Component {
+  render() {
+    const itemList = this.props.sightings.map(( sighting ) =>
+      <li key={ sighting.id }><StalkListItem item={sighting} onClick={() => this.props.onClick( sighting.id )} /></li>
+    );
 
-  // function handleClick( event ) {
-  //   console.info( event.target ); // debug
-  // }
-
-  return (
-    <ul>
-      { itemList }
-    </ul>
-  )
+    return (
+      <ul>
+        { itemList }
+      </ul>
+    )
+  }
 }
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      list: true,
-      id: 19,
+      id: null,
       sightings: []
     }
     this.getSightings = this.getSightings.bind( this );
-    this.pickItem = this.pickItem.bind( this );
+    this.handleClick = this.handleClick.bind( this );
   }
 
   getSightings() {
@@ -158,7 +154,8 @@ class App extends Component {
       .catch( e => console.error( e.stack ));
   }
 
-  pickItem( id ) {
+  handleClick( id ) {
+    console.info('handleClick', id);
     this.setState({ id: id });
   }
 
@@ -171,13 +168,11 @@ class App extends Component {
           sighting.id === this.state.id
         );
 
-    // console.info( item );
-
     return (
       <div className="App">
         <Form getSightings={this.getSightings} />
         { item !== undefined && <Stalk item={ item } /> }
-        <StalkList sightings={this.state.sightings} pickItem={this.pickItem} />
+        <StalkList sightings={this.state.sightings} onClick={( id ) => this.handleClick( id )} />
       </div>
     );
   }
