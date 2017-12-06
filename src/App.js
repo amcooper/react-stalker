@@ -7,11 +7,13 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      celebrity: '',
-      stalker: '',
-      date: '',
-      location: '',
-      comment: ''
+      formValues: {
+        celebrity: '',
+        stalker: '',
+        date: '',
+        location: '',
+        comment: ''
+      }
     };
 
     this.handleChange = this.handleChange.bind( this );
@@ -22,26 +24,31 @@ class Form extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
+    console.info( 'handleChange', name, value );
     this.setState({
-      [name]: value
+      formValues: {
+        [name]: value
+      }
     });
   }
 
   handleSubmit(event) {
     let data = new URLSearchParams();
-    data.append('celebrity', this.state.celebrity);
-    data.append('stalker', this.state.stalker);
-    data.append('date', this.state.date);
-    data.append('location', this.state.location);
-    data.append('comment', this.state.comment);
-    console.info(data);
+    data.append('celebrity', this.state.formValues.celebrity);
+    data.append('stalker', this.state.formValues.stalker);
+    data.append('date', this.state.formValues.date);
+    data.append('location', this.state.formValues.location);
+    data.append('comment', this.state.formValues.comment);
+    console.info(data.toString()); // debug
 
     event.preventDefault();
-    console.log('Handle submit here');
+    console.log('Handle submit here'); // debug
 
-    fetch(config.apiURL, {
-      method: 'POST',
+    let fetchURL = config.apiURL + this.props.isEditForm ? `/${this.props.item.id}` : '';
+    let fetchMethod = this.props.isEditForm ? 'PUT' : 'POST';
+
+    fetch(fetchURL, {
+      method: fetchMethod,
       headers: {
         'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
@@ -59,38 +66,57 @@ class Form extends Component {
 
   resetForm() {
     this.setState({
-      celebrity: '',
-      stalker: '',
-      date: '',
-      location: '',
-      comment: ''
+      formValues: {
+        celebrity: '',
+        stalker: '',
+        date: '',
+        location: '',
+        comment: ''
+      }
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if ( nextProps.item ) {
+      this.setState({
+      // set something
+        formValues: {
+          celebrity: nextProps.item.celebrity || '',
+          stalker: nextProps.item.stalker || '',
+          date: nextProps.item.date || '',
+          location: nextProps.item.location || '',
+          comment: nextProps.item.comment || '',
+        }
+      });
+    }
+  }
+
   render() {
+    console.info( 'render Form', this.props.item, this.state.formValues ); // debug
+
     return (
       <form id='input-form' onSubmit={this.handleSubmit}>
         <label>
-          Celebrity: <input type="text" name="celebrity" value={this.state.celebrity} onChange={this.handleChange} />
+          Celebrity: <input type="text" name="celebrity" value={this.state.formValues.celebrity} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Stalker: <input type="text" name="stalker" value={this.state.stalker} onChange={this.handleChange} />
+          Stalker: <input type="text" name="stalker" value={this.state.formValues.stalker} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Date and time: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleChange} />
+          Date and time: <input type="datetime-local" name="date" value={this.state.formValues.date} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Location: <input type="text" name="location" value={this.state.location} onChange={this.handleChange} />
+          Location: <input type="text" name="location" value={this.state.formValues.location} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Comment: <textarea name="comment" value={this.state.comment} onChange={this.handleChange} />
+          Comment: <textarea name="comment" value={this.state.formValues.comment} onChange={this.handleChange} />
         </label>
         <br />
-        <input type="submit" value="Submit" />
+        <input type="submit" value={this.props.isEditForm ? "Update" : "Create"} />
       </form>
     )
   }
@@ -99,7 +125,11 @@ class Form extends Component {
 function Stalk(props) {
   return (
     <div>
-      <p><button onClick={() => props.onDelete( props.item.id )}>delete</button> { props.item.celebrity } - { props.item.stalker } - { props.item.date } - { props.item.location } - { props.item.comment }</p>
+      <p>
+        <button onClick={() => props.onEdit( props.item.id )}>edit</button>
+        <button onClick={() => props.onDelete( props.item.id )}>delete</button>
+        { props.item.celebrity } - { props.item.stalker } - { props.item.date } - { props.item.location } - { props.item.comment }
+      </p>
     </div>
   )
 }
@@ -130,6 +160,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      isEditForm: false,
       id: null,
       sightings: []
     }
@@ -160,6 +191,13 @@ class App extends Component {
     this.setState({ id: id });
   }
 
+  editItem( id ) {
+    this.setState({
+      // id: id,
+      isEditForm: true
+    });
+  }
+
   deleteItem( id ) {
     fetch( `${config.apiURL}/${id}`, {
       method: 'DELETE',
@@ -183,14 +221,16 @@ class App extends Component {
   }
 
   render() {
+    console.info( 'render App' ); // debug
+
     let item = this.state.sightings.find((sighting) =>
           sighting.id === this.state.id
         );
 
     return (
       <div className="App">
-        <Form getSightings={this.getSightings} />
-        { item !== undefined && <Stalk item={ item } onDelete={( id ) => this.deleteItem( id )} /> }
+        <Form getSightings={this.getSightings} isEditForm={this.state.isEditForm} item={ this.state.isEditForm ? item : null} />
+        { item !== undefined && <Stalk item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} /> }
         <StalkList sightings={this.state.sightings} onClick={( id ) => this.handleClick( id )} />
       </div>
     );
