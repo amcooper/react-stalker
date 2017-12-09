@@ -6,14 +6,13 @@ class Form extends Component {
 
   constructor(props) {
     super(props);
+    let date = new Date( Date.now());
     this.state = {
-      formValues: {
-        celebrity: '',
-        stalker: '',
-        date: '',
-        location: '',
-        comment: ''
-      }
+      celebrity: '',
+      stalker: '',
+      date: `${ date.toISOString().slice( 0, -1 )}`,
+      location: '',
+      comment: ''
     };
 
     this.handleChange = this.handleChange.bind( this );
@@ -26,25 +25,38 @@ class Form extends Component {
     const name = target.name;
     console.info( 'handleChange', name, value );
     this.setState({
-      formValues: {
-        [name]: value
-      }
+      [name]: value
     });
   }
 
+  // handleChange( event ) {
+  //   var partialState = {};
+  //   partialState.formValues = {};
+  //   partialState.formValues[ event.target.name ] = event.target.value;
+  //   console.info( 'handleChange:', event.target.name, event.target.value );
+  //   this.setState({ partialState });
+  //   console.info( 'formValues', this.state.formValues );
+  // }
+
   handleSubmit(event) {
     let data = new URLSearchParams();
-    data.append('celebrity', this.state.formValues.celebrity);
-    data.append('stalker', this.state.formValues.stalker);
-    data.append('date', this.state.formValues.date);
-    data.append('location', this.state.formValues.location);
-    data.append('comment', this.state.formValues.comment);
+    data.append('celebrity', this.state.celebrity);
+    data.append('stalker', this.state.stalker);
+    data.append('date', this.state.date);
+    data.append('location', this.state.location);
+    data.append('comment', this.state.comment);
     console.info(data.toString()); // debug
 
     event.preventDefault();
     console.log('Handle submit here'); // debug
 
-    let fetchURL = config.apiURL + this.props.isEditForm ? `/${this.props.item.id}` : '';
+    let fetchURL = config.apiURL + ( this.props.isEditForm ? `/${this.props.item ? this.props.item.id : ''}` : '' );
+    console.info( 'config' );
+    console.info( config );
+    console.info( 'fetchURL', fetchURL );
+    // if ( this.props.isEditForm ) {
+    //   fetchURL += 
+    // }
     let fetchMethod = this.props.isEditForm ? 'PUT' : 'POST';
 
     fetch(fetchURL, {
@@ -66,13 +78,11 @@ class Form extends Component {
 
   resetForm() {
     this.setState({
-      formValues: {
-        celebrity: '',
-        stalker: '',
-        date: '',
-        location: '',
-        comment: ''
-      }
+      celebrity: '',
+      stalker: '',
+      date: '',
+      location: '',
+      comment: ''
     });
   }
 
@@ -80,40 +90,38 @@ class Form extends Component {
     if ( nextProps.item ) {
       this.setState({
       // set something
-        formValues: {
-          celebrity: nextProps.item.celebrity || '',
-          stalker: nextProps.item.stalker || '',
-          date: nextProps.item.date.toISOString().slice( 0, -1 ) || '',
-          location: nextProps.item.location || '',
-          comment: nextProps.item.comment || '',
-        }
+        celebrity: nextProps.item.celebrity || '',
+        stalker: nextProps.item.stalker || '',
+        date: nextProps.item.date.toISOString().slice( 0, -1 ) || '',
+        location: nextProps.item.location || '',
+        comment: nextProps.item.comment || '',
       });
     }
   }
 
   render() {
-    console.info( 'render Form', this.props.item, this.state.formValues ); // debug
+    console.info( 'render Form', this.props.item, this.state ); // debug
 
     return (
       <form id='input-form' onSubmit={this.handleSubmit}>
         <label>
-          Celebrity: <input type="text" name="celebrity" value={this.state.formValues.celebrity} onChange={this.handleChange} />
+          Celebrity: <input type="text" name="celebrity" value={this.state.celebrity} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Stalker: <input type="text" name="stalker" value={this.state.formValues.stalker} onChange={this.handleChange} />
+          Stalker: <input type="text" name="stalker" value={this.state.stalker} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Date and time: <input type="datetime-local" name="date" value={this.state.formValues.date} onChange={this.handleChange} />
+          Date and time: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Location: <input type="text" name="location" value={this.state.formValues.location} onChange={this.handleChange} />
+          Location: <input type="text" name="location" value={this.state.location} onChange={this.handleChange} />
         </label>
         <br />
         <label>
-          Comment: <textarea name="comment" value={this.state.formValues.comment} onChange={this.handleChange} />
+          Comment: <textarea name="comment" value={this.state.comment} onChange={this.handleChange} />
         </label>
         <br />
         <input type="submit" value={this.props.isEditForm ? "Update" : "Create"} />
@@ -128,7 +136,7 @@ function Stalk(props) {
       <p>
         <button onClick={() => props.onEdit( props.item.id )}>edit</button>
         <button onClick={() => props.onDelete( props.item.id )}>delete</button>
-        { props.item.celebrity } - { props.item.stalker } - { props.item.date.toDateString() } - { props.item.location } - { props.item.comment }
+        { props.item.stalker } spotted { props.item.celebrity } on { props.item.date.toDateString() } in { props.item.location }: "{ props.item.comment }"
       </p>
     </div>
   )
