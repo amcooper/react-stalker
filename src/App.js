@@ -83,7 +83,7 @@ class Form extends Component {
         formValues: {
           celebrity: nextProps.item.celebrity || '',
           stalker: nextProps.item.stalker || '',
-          date: nextProps.item.date || '',
+          date: nextProps.item.date.toISOString().slice( 0, -1 ) || '',
           location: nextProps.item.location || '',
           comment: nextProps.item.comment || '',
         }
@@ -128,7 +128,7 @@ function Stalk(props) {
       <p>
         <button onClick={() => props.onEdit( props.item.id )}>edit</button>
         <button onClick={() => props.onDelete( props.item.id )}>delete</button>
-        { props.item.celebrity } - { props.item.stalker } - { props.item.date } - { props.item.location } - { props.item.comment }
+        { props.item.celebrity } - { props.item.stalker } - { props.item.date.toDateString() } - { props.item.location } - { props.item.comment }
       </p>
     </div>
   )
@@ -137,7 +137,7 @@ function Stalk(props) {
 function StalkListItem( props ) {
   return (
     <div onClick={() => props.onClick()}>
-      <p>{ props.item.celebrity } on { props.item.date }</p>
+      <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
     </div>
   )
 }
@@ -167,6 +167,7 @@ class App extends Component {
     this.getSightings = this.getSightings.bind( this );
     this.handleClick = this.handleClick.bind( this );
     this.deleteItem = this.deleteItem.bind( this );
+    this.editItem = this.editItem.bind( this );
   }
 
   getSightings() {
@@ -181,7 +182,16 @@ class App extends Component {
       })
       .then(( json ) => {
         console.log('GET req'); // debug
-        this.setState({ sightings: json });
+        console.info( 'json', json );
+        let sightings = json.map(( sighting ) => {
+          let [y,mo,d,h,min] = sighting.date.split(/[-T:Z]/); 
+          sighting.date = new Date(y, mo, d, h, min);
+          return sighting;
+        });
+        return sightings;
+      })
+      .then(( sightings ) => {
+        this.setState({ sightings: sightings });
       })
       .catch( e => console.error( e.stack ));
   }
