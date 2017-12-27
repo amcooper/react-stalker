@@ -83,26 +83,26 @@ class Form extends Component {
   render() {
     return (
       <form id='input-form' onSubmit={this.handleSubmit}>
-        <label>
-          Celebrity: <input type="text" name="celebrity" value={this.state.celebrity} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Stalker: <input type="text" name="stalker" value={this.state.stalker} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Date and time: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Location: <input type="text" name="location" value={this.state.location} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Comment: <textarea name="comment" value={this.state.comment} onChange={this.handleChange} />
-        </label>
-        <br />
+        <div>
+          <label>Celebrity:</label>
+          <input type="text" name="celebrity" value={this.state.celebrity} onChange={this.handleChange} />
+        </div>
+        <div>
+          <label>Stalker:</label>
+          <input type="text" name="stalker" value={this.state.stalker} onChange={this.handleChange} />
+        </div>
+        <div>
+          <label>Date and time:</label>
+          <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleChange} />
+        </div>
+        <div>
+          <label>Location:</label>
+          <input type="text" name="location" value={this.state.location} onChange={this.handleChange} />
+        </div>
+        <div>
+          <label>Comment:</label>
+          <textarea name="comment" value={this.state.comment} onChange={this.handleChange} />
+        </div>
         <input type="submit" value={this.props.isEditForm ? "Update" : "Create"} />
       </form>
     )
@@ -111,7 +111,7 @@ class Form extends Component {
 
 function Stalk(props) {
   return (
-    <div>
+    <div id="Stalk">
       <p>
         <button onClick={() => props.onEdit( props.item.id )}>edit</button>
         <button onClick={() => props.onDelete( props.item.id )}>delete</button>
@@ -123,7 +123,7 @@ function Stalk(props) {
 
 function StalkListItem( props ) {
   return (
-    <div onClick={() => props.onClick()}>
+    <div className="StalkListItem" onClick={() => props.onClick()}>
       <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
     </div>
   )
@@ -136,7 +136,7 @@ class StalkList extends Component {
     );
 
     return (
-      <ul>
+      <ul id="StalkList">
         { itemList }
       </ul>
     )
