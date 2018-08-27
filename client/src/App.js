@@ -166,7 +166,7 @@ class App extends Component {
   }
 
   getSightings() {
-    fetch( config.apiURL, { mode: 'cors' })
+    fetch( config.apiURL[ process.env.NODE_ENV || 'development' ], { mode: 'cors' })
       .then(( res ) => {
         if (res.status !== 200) {
           console.error( `HTTP status code: ${res.status}` );
