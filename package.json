@@ -4,15 +4,20 @@
   "private": true,
   "dependencies": {
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "body-parser": "^1.18.2",
+    "bookshelf": "^0.10.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.2",
+    "knex": "^0.13.0",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0",
+    "pg": "^7.3.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.13"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "nodemon server/server.js && cd client && webpack-dev-server && cd .."
   }
 }
