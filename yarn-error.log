@@ -1,0 +1,52 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.9.4/libexec/bin/yarn.js
+
+PATH: 
+  /Users/adamcooper/.cargo/bin:/usr/local/opt/sqlite/bin:/usr/local/opt/postgresql@9.6/bin:/usr/local/gradle-2.10/bin:/Users/adamcooper/Library/Android/sdk/platform-tools:/usr/local/heroku/bin:/Users/adamcooper/.rbenv/shims:/Users/adamcooper/.rbenv/bin:/usr/local/bin:/usr/local/phantomjs-2.1.1-macosx/bin:~/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/opt/X11/bin:/usr/local/bin
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  10.3.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/adamcooper/code/react-stalker/package.json: Unexpected token } in JSON at position 354
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:1130:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:92:30)
+      at /usr/local/Cellar/yarn/1.9.4/libexec/lib/cli.js:103:13
+
+npm manifest: 
+  {
+    "name": "react-stalker",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "body-parser": "^1.18.2",
+      "bookshelf": "^0.10.4",
+      "dotenv": "^5.0.1",
+      "express": "^4.16.2",
+      "knex": "^0.13.0",
+      "method-override": "^2.3.10",
+      "morgan": "^1.9.0",
+      "pg": "^7.3.0"
+    },
+    "devDependencies": {
+      "nodemon": "^1.18.3",
+    },
+    "scripts": {
+      "serve-api": "nodemon server/server.js &",
+      "dev": "yarn run serve-api && cd client && yarn run serve-client"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
