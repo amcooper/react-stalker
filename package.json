@@ -13,7 +13,9 @@
     "pg": "^7.3.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.3"
+    "css-loader": "^1.0.0",
+    "nodemon": "^1.18.3",
+    "style-loader": "^0.23.0"
   },
   "scripts": {
     "serve-api": "nodemon server/server.js &",
