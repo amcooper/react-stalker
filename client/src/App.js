@@ -36,7 +36,8 @@ class Form extends Component {
 
     event.preventDefault();
 
-    let fetchURL = config.apiURL + ( this.props.isEditForm ? `/${this.props.item ? this.props.item.id : ''}` : '' );
+    let fetchURL = `
+      ${config.apiURL[ process.env.NODE_ENV ]}${( this.props.isEditForm ? `/${this.props.item ? this.props.item.id : ''}` : '' )}`;
     let fetchMethod = this.props.isEditForm ? 'PUT' : 'POST';
 
     fetch(fetchURL, {
@@ -198,7 +199,7 @@ class App extends Component {
   }
 
   deleteItem( id ) {
-    fetch( `${config.apiURL}/${id}`, {
+    fetch( `${config.apiURL[ process.env.NODE_ENV ]}/${id}`, {
       method: 'DELETE',
       mode: 'cors'
     })
