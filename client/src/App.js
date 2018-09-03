@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import config from './config.js';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class Form extends Component {
 
@@ -110,7 +111,7 @@ class Form extends Component {
   }
 }
 
-function Stalk(props) {
+function Stalk( props ) {
   return (
     <div id="Stalk">
       <p>
@@ -125,7 +126,9 @@ function Stalk(props) {
 function StalkListItem( props ) {
   return (
     <div className="StalkListItem" onClick={() => props.onClick()}>
+    <Link to={`${ props.item.id }`}>
       <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
+    </Link>
     </div>
   )
 }
@@ -224,11 +227,17 @@ class App extends Component {
     );
 
     return (
+      <Router>
       <div className="App">
         <Form resetAppState={this.resetAppState} getSightings={this.getSightings} isEditForm={this.state.isEditForm} item={ this.state.isEditForm ? item : null} />
-        { item !== undefined && <Stalk item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} /> }
+        {/* { item !== undefined && <Stalk item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} /> } */}
+        <Route 
+          path={`/${this.state.id}`} 
+          render = {props => {<Stalk { ...props } />}}
+        />
         <StalkList sightings={this.state.sightings} onClick={( id ) => this.handleClick( id )} />
       </div>
+      </Router>
     );
   }
 }
