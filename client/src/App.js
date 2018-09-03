@@ -111,14 +111,14 @@ class Form extends Component {
   }
 }
 
-function Stalk({ match }) {
+function Stalk( props ) {
   return (
     <div id="Stalk">
       <p>
-        { match.params.id }
-        {/* <button onClick={() => props.onEdit( props.item.id )}>edit</button>
+        {/* { match.params.id } */}
+        <button onClick={() => props.onEdit( props.item.id )}>edit</button> 
         <button onClick={() => props.onDelete( props.item.id )}>delete</button>
-        { props.item.stalker } spotted { props.item.celebrity } on { props.item.date.toDateString() } in { props.item.location }: "{ props.item.comment }" */}
+        { props.item.stalker } spotted { props.item.celebrity } on { props.item.date.toDateString() } in { props.item.location }: "{ props.item.comment }" 
       </p>
     </div>
   )
@@ -126,11 +126,11 @@ function Stalk({ match }) {
 
 function StalkListItem( props ) {
   return (
-    <div className="StalkListItem" onClick={() => props.onClick()}>
     <Link to={`/${ props.item.id }`}>
-      <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
+      <div className="StalkListItem" onClick={() => props.onClick()}>
+        <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
+      </div>
     </Link>
-    </div>
   )
 }
 
@@ -228,18 +228,15 @@ class App extends Component {
     );
 
     return (
-      <Router>
       <div className="App">
         <Form resetAppState={this.resetAppState} getSightings={this.getSightings} isEditForm={this.state.isEditForm} item={ this.state.isEditForm ? item : null} />
         {/* { item !== undefined && <Stalk item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} /> } */}
         <Route 
           path="/:id"
-          // render={props => {<Stalk { ...props } />}}
-          component={Stalk}
+          render={props => <Stalk { ...props } item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} />}
         />
         <StalkList sightings={this.state.sightings} onClick={( id ) => this.handleClick( id )} />
       </div>
-      </Router>
     );
   }
 }
