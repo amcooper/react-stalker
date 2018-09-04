@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import config from './config.js';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class Form extends Component {
 
@@ -36,7 +37,8 @@ class Form extends Component {
 
     event.preventDefault();
 
-    let fetchURL = config.apiURL + ( this.props.isEditForm ? `/${this.props.item ? this.props.item.id : ''}` : '' );
+    let fetchURL = `
+      ${config.apiURL[ process.env.NODE_ENV ]}${( this.props.isEditForm ? `/${this.props.item ? this.props.item.id : ''}` : '' )}`;
     let fetchMethod = this.props.isEditForm ? 'PUT' : 'POST';
 
     fetch(fetchURL, {
@@ -109,10 +111,11 @@ class Form extends Component {
   }
 }
 
-function Stalk(props) {
+function Stalk( props ) {
   return (
     <div id="Stalk">
       <p>
+        {/* { match.params.id } */}
         <button onClick={() => props.onEdit( props.item.id )}>edit</button>
         <button onClick={() => props.onDelete( props.item.id )}>delete</button>
         { props.item.stalker } spotted { props.item.celebrity } on { props.item.date.toDateString() } in { props.item.location }: "{ props.item.comment }"
@@ -123,9 +126,11 @@ function Stalk(props) {
 
 function StalkListItem( props ) {
   return (
-    <div className="StalkListItem" onClick={() => props.onClick()}>
-      <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
-    </div>
+    <Link to={`/${ props.item.id }`}>
+      <div className="StalkListItem" onClick={() => props.onClick()}>
+        <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
+      </div>
+    </Link>
   )
 }
 
@@ -166,7 +171,7 @@ class App extends Component {
   }
 
   getSightings() {
-    fetch( config.apiURL, { mode: 'cors' })
+    fetch( config.apiURL[ process.env.NODE_ENV || 'development' ], { mode: 'cors' })
       .then(( res ) => {
         if (res.status !== 200) {
           console.error( `HTTP status code: ${res.status}` );
@@ -177,7 +182,7 @@ class App extends Component {
       })
       .then(( json ) => {
         let sightings = json.map(( sighting ) => {
-          let [y,mo,d,h,min] = sighting.date.split(/[-T:Z]/); 
+          let [y,mo,d,h,min] = sighting.date.split(/[-T:Z]/);
           sighting.date = new Date(y, mo - 1, d, h, min);
           return sighting;
         });
@@ -198,7 +203,7 @@ class App extends Component {
   }
 
   deleteItem( id ) {
-    fetch( `${config.apiURL}/${id}`, {
+    fetch( `${config.apiURL[ process.env.NODE_ENV ]}/${id}`, {
       method: 'DELETE',
       mode: 'cors'
     })
@@ -224,9 +229,17 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Form resetAppState={this.resetAppState} getSightings={this.getSightings} isEditForm={this.state.isEditForm} item={ this.state.isEditForm ? item : null} />
-        { item !== undefined && <Stalk item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} /> }
-        <StalkList sightings={this.state.sightings} onClick={( id ) => this.handleClick( id )} />
+
+          <Form resetAppState={this.resetAppState} getSightings={this.getSightings} isEditForm={this.state.isEditForm} item={ this.state.isEditForm ? item : null} />
+          {/* { item !== undefined && <Stalk item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} /> } */}
+          <Route
+            path="/:id"
+            render={props => <Stalk { ...props } item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} />}
+          />
+          <Route
+            path="/"
+            render={ props => <StalkList { ...props} sightings={this.state.sightings} onClick={( id ) => this.handleClick( id )} />}
+          />
       </div>
     );
   }
