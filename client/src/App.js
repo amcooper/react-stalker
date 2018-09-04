@@ -115,7 +115,6 @@ function Stalk( props ) {
   return (
     <div id="Stalk">
       <p>
-        {/* { match.params.id } */}
         <button onClick={() => props.onEdit( props.item.id )}>edit</button>
         <button onClick={() => props.onDelete( props.item.id )}>delete</button>
         { props.item.stalker } spotted { props.item.celebrity } on { props.item.date.toDateString() } in { props.item.location }: "{ props.item.comment }"
@@ -231,7 +230,6 @@ class App extends Component {
       <div className="App">
 
           <Form resetAppState={this.resetAppState} getSightings={this.getSightings} isEditForm={this.state.isEditForm} item={ this.state.isEditForm ? item : null} />
-          {/* { item !== undefined && <Stalk item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} /> } */}
           <Route
             path="/:id"
             render={props => <Stalk { ...props } item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} />}
