@@ -2,8 +2,10 @@
 
 An exercise on building full stack apps from scratch, with all the fixings.
 
-Right now it's a React application, consuming a Node.jsgExpress API backed by a PostgreSQL database.
+Right now it's a React application, consuming a Node.js/Express API backed by a PostgreSQL database.
 
+* _TODO_ [bug] Rendering after create/update
+* _TODO_ [bug] created_at, updated_at
 * _TODO_ ESLint
 * _TODO_ Prettier
 * _TODO_ Testing: Jest and Chai
