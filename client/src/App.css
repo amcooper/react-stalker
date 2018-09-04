@@ -1,5 +1,4 @@
 .App {
-  /*text-align: center;*/
   background-color: #07889B;
 }
 
@@ -29,7 +28,7 @@ label {
 
 .Stalk {
   background-color: #07889B;
-  color: white; 
+  color: white;
 }
 
 .StalkList {

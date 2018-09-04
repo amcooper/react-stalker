@@ -1,4 +1,3 @@
-// Update with your config settings.
 require( 'dotenv' ).load();
 
 module.exports = {
@@ -6,11 +5,6 @@ module.exports = {
   development: {
     client: 'pg',
     connection: process.env.DATABASE_URL || 'postgres://localhost:5432/react_stalker',
-    // connection: {
-    //   database: 'react_stalker',
-    //   user:     'adamcooper',
-    //   // password: 'password'
-    // },
     pool: {
       min: 2,
       max: 10
@@ -23,11 +17,6 @@ module.exports = {
   staging: {
     client: 'pg',
     connection: process.env.DATABASE_URL || 'postgres://localhost:5432/react_stalker',
-    // connection: {
-    //   database: 'react_stalker',
-    //   user:     'adamcooper',
-    //   // password: 'password'
-    // },
     pool: {
       min: 2,
       max: 10
@@ -40,11 +29,6 @@ module.exports = {
   production: {
     client: 'pg',
     connection: process.env.DATABASE_URL || 'postgres://localhost:5432/react_stalker',
-    // connection: {
-    //   database: 'react_stalker',
-    //   user:     'adamcooper',
-    //   // password: 'password'
-    // },
     pool: {
       min: 2,
       max: 10
