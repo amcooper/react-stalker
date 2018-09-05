@@ -1,0 +1,23 @@
+label {
+  float: left;
+  text-align: right;
+  margin-right: 15px;
+  width: 125px;
+}
+
+#input-form {
+  background-color: #07889B;
+  color: white;
+}
+
+#input-form div {
+  margin-bottom: 5px;
+}
+
+#input-form input, #input-form textarea {
+  width: 275px;
+}
+
+#input-form input[type="submit"] {
+  width: 150px;
+}
