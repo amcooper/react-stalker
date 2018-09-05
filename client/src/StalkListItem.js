@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function StalkListItem( props ) {
+function StalkListItem( props ) {
   return (
     <Link to={`/${ props.item.id }`}>
       <div className="StalkListItem" onClick={() => props.onClick()}>
@@ -10,3 +10,5 @@ export default function StalkListItem( props ) {
     </Link>
   )
 }
+
+export default StalkListItem;

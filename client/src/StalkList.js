@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import "./StalkList.css";
 import StalkListItem from "./StalkListItem";
 
 class StalkList extends Component {
