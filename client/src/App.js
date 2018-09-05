@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import config from './config.js';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import StalkList from "./StalkList";
 
 class Form extends Component {
 
@@ -121,30 +122,6 @@ function Stalk( props ) {
       </p>
     </div>
   )
-}
-
-function StalkListItem( props ) {
-  return (
-    <Link to={`/${ props.item.id }`}>
-      <div className="StalkListItem" onClick={() => props.onClick()}>
-        <p>{ props.item.celebrity } on { props.item.date.toDateString() }</p>
-      </div>
-    </Link>
-  )
-}
-
-class StalkList extends Component {
-  render() {
-    const itemList = this.props.sightings.map(( sighting ) =>
-      <li key={ sighting.id }><StalkListItem item={sighting} onClick={() => this.props.onClick( sighting.id )} /></li>
-    );
-
-    return (
-      <ul id="StalkList">
-        { itemList }
-      </ul>
-    )
-  }
 }
 
 class App extends Component {
