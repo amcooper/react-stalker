@@ -22,13 +22,6 @@ class App extends Component {
   }
 
   resetAppState() {
-    console.log( `
-      ***********************
-      *
-      *  ${this.state.isEditForm ? "PUT" : "POST"}
-      *  We expect the App state to reset on PUT and POST.
-      *
-    ` );
     this.setState({
       id: null,
       isEditForm: false
