@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import config from './config.js';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import Form from "./Form";
 import Stalk from "./Stalk";
 import StalkList from "./StalkList";
@@ -22,6 +22,13 @@ class App extends Component {
   }
 
   resetAppState() {
+    console.log( `
+      ***********************
+      *
+      *  ${this.state.isEditForm ? "PUT" : "POST"}
+      *  We expect the App state to reset on PUT and POST.
+      *
+    ` );
     this.setState({
       id: null,
       isEditForm: false
@@ -91,7 +98,10 @@ class App extends Component {
           <Form resetAppState={this.resetAppState} getSightings={this.getSightings} isEditForm={this.state.isEditForm} item={ this.state.isEditForm ? item : null} />
           <Route
             path="/:id"
-            render={props => <Stalk { ...props } item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} />}
+            render={props => ( item == null
+              ? <Redirect to="/" />
+              : <Stalk { ...props } item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} />
+            )}
           />
           <Route
             path="/"
