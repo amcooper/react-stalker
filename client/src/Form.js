@@ -27,12 +27,16 @@ class Form extends Component {
   }
 
   handleSubmit(event) {
+    // const currentTimestamp = "2018-09-07";
+    const currentTimestamp = new Date().toUTCString();
     let data = new URLSearchParams();
     data.append('celebrity', this.state.celebrity);
     data.append('stalker', this.state.stalker);
     data.append('date', this.state.date);
     data.append('location', this.state.location);
     data.append('comment', this.state.comment);
+    data.append('created_at', this.props.item ? this.props.item.created_at || new Date( "1970-01-01 11:59:59" ) : currentTimestamp);
+    data.append('updated_at', currentTimestamp);
 
     event.preventDefault();
 
