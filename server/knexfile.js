@@ -1,16 +1,35 @@
 require( 'dotenv' ).load();
+const path = require( 'path' );
 
 module.exports = {
 
   development: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost:5432/react_stalker',
+    connection: 'postgres://localhost:5432/react_stalker',
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: path.join( __dirname, 'seeds', 'development' )
+    }
+  },
+
+  test: {
+    client: 'pg',
+    connection: 'postgres://localhost:5432/react_stalker_test',
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: path.join( __dirname, 'seeds', 'test' )
     }
   },
 
@@ -23,18 +42,24 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: path.join( __dirname, 'seeds', 'production' )
     }
   },
 
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost:5432/react_stalker',
+    connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: path.join( __dirname, 'seeds', 'production' )
     }
   }
 
