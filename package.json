@@ -20,6 +20,7 @@
   },
   "scripts": {
     "serve-api": "nodemon server/server.js &",
-    "dev": "yarn run serve-api && cd client && yarn run serve-client"
+    "dev": "yarn run serve-api && cd client && yarn run serve-client",
+    "test": "jest ./server"
   }
 }

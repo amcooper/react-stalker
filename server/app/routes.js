@@ -1,27 +1,27 @@
 const Sighting = require( './models/sighting' );
+const express = require( 'express' );
+const router = express.Router();
 
-module.exports = function( app ) {
-	app.get( '/api/sightings', ( request, response, next ) => {
-    console.log(process.env.DATABASE_URL);
+	router.get( '/sightings', ( request, response, next ) => {
 		Sighting.fetchAll()
       .then( res => response.json( res ))
       .catch( e => console.error( e.stack ));
 	});
 
-  app.get( '/api/sightings/:id', (request, response, next ) => {
+  router.get( '/sightings/:id', (request, response, next ) => {
     Sighting.where('id', request.params.id).fetch()
       .then( res => response.json( res ))
       .catch( e => console.error( e.stack ));
   });
 
-  app.post( '/api/sightings', ( request, response, next ) => {
+  router.post( '/sightings', ( request, response, next ) => {
     Sighting.forge( request.body )
       .save()
       .then( res => response.json( res ))
       .catch( e => console.error( e.stack ));
   });
 
-  app.put( '/api/sightings/:id', ( request, response, next ) => {
+  router.put( '/sightings/:id', ( request, response, next ) => {
     Sighting.where( 'id', request.params.id ).fetch()
       .then( res_fetch => 
         res_fetch.set( request.body )
@@ -32,7 +32,7 @@ module.exports = function( app ) {
       .catch( e_fetch => console.error( e_fetch.stack ));
   });
 
-  app.delete( '/api/sightings/:id', ( request, response, next ) => {
+  router.delete( '/sightings/:id', ( request, response, next ) => {
     Sighting.where( 'id', request.params.id ).fetch()
       .then( res_fetch =>
         res_fetch.destroy()
@@ -41,4 +41,5 @@ module.exports = function( app ) {
       )
       .catch( e_fetch => console.error( e_fetch.stack ));
   });
-};
+
+module.exports = router;
