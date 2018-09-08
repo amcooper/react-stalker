@@ -23,11 +23,8 @@ app.use(function(req, res, next) {
 
 app.use( '/api/v1', routes );
 
-app.get('/', function( request, response ) {
-	response.json('Slash route is go.');
+app.listen( port, () => {
+  console.log(`A quokka is listening on port ${port}.`);
 });
-
-app.listen( port );
-console.log(`A quokka is listening on port ${port}.`);
 
 module.exports = app;
