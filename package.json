@@ -21,6 +21,6 @@
   "scripts": {
     "serve-api": "nodemon server/server.js &",
     "dev": "yarn run serve-api && cd client && yarn run serve-client",
-    "test": "mocha ./server/test --exit"
+    "test": "mocha ./server/test"
   }
 }
