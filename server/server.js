@@ -23,8 +23,10 @@ app.use(function(req, res, next) {
 
 app.use( '/api/v1', routes );
 
-app.listen( port, () => {
-  console.log(`A quokka is listening on port ${port}.`);
-});
+if ( process.env.NODE_ENV !== "test" ) {
+  app.listen( port, () => {
+    console.log(`A quokka is listening on port ${port}.`);
+  });
+};
 
 module.exports = app;
