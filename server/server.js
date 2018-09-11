@@ -23,9 +23,11 @@ app.use(function(req, res, next) {
 
 app.use( '/api/v1', routes );
 
+    console.log(`env: ${process.env.NODE_ENV} - ${process.env.PORT}`);
 if ( process.env.NODE_ENV !== "test" ) {
   app.listen( port, () => {
     console.log(`A quokka is listening on port ${port}.`);
+    console.log(`${process.env.NODE_ENV} - ${process.env.PORT}`);
   });
 };
 
