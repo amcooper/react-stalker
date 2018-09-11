@@ -31,7 +31,7 @@ class App extends Component {
   /*
    * Note: this method is all screwed up. It was working, and then the error
    * handling fixes in the back end broke it. The data is fetched but it
-   * doesn't render or even update the state.
+   * doesn't render.
    *
    */
   getSightings() {
