@@ -23,11 +23,12 @@ const router = express.Router();
 
   router.put( '/sightings/:id', ( request, response, next ) => {
     Sighting.where( 'id', request.params.id ).fetch()
-      .then( res_fetch => 
+      .then( res_fetch =>
         res_fetch.set( request.body )
         .save()
         .then( res_save => response.json( res_save ))
-        .catch( e_save => console.error( e_save.stack ))
+        // .catch( e_save => console.error( e_save.stack ))
+				.catch( e_save => next( e_save ))
       )
       .catch( e_fetch => console.error( e_fetch.stack ));
   });
