@@ -24,5 +24,29 @@ app.get('/', function( request, response ) {
 	response.json('Slash route is go.');
 });
 
+app.use(( request, response, next ) => {
+  response.status( 404 ).send( "The requested resource was not found." );
+});
+
+if (process.env.NODE_ENV === "development" ) {
+  app.use(( error, request, response, next ) => {
+    response.status( error.status || 500 );
+    response.json({
+      message: error.message,
+      error: process.env.NODE_ENV === "development" ? error : {}
+    });
+    next();
+  });
+}
+
+app.use(( error, request, response, next ) => {
+  response.status( error.status || 500 );
+  response.json({
+    message: error.message,
+    error: {}
+  });
+  next();
+});
+
 app.listen( port );
 console.log(`A quokka is listening on port ${port}.`);
