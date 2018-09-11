@@ -23,24 +23,17 @@ app.use(function(req, res, next) {
 
 app.use( '/api/v1', routes );
 
-if (process.env.NODE_ENV === "development" ) {
-  app.use(( error, request, response, next ) => {
-    response.status( error.status || 500 );
-    response.json({
-      message: error.message,
-      error: process.env.NODE_ENV === "development" ? error : {}
-    });
-    next();
-  });
-}
-
 app.use(( error, request, response, next ) => {
   response.status( error.status || 500 );
   response.json({
     message: error.message,
-    error: {}
+    error: process.env.NODE_ENV === "development" ? error : {}
   });
   next();
+});
+
+app.use(( request, response, next ) => {
+  response.status( 404 ).send( "The requested resource was not found." );
 });
 
 if ( process.env.NODE_ENV !== "test" ) {
@@ -49,9 +42,5 @@ if ( process.env.NODE_ENV !== "test" ) {
     console.log(`${process.env.NODE_ENV} - ${process.env.PORT}`);
   });
 };
-
-app.use(( request, response, next ) => {
-  response.status( 404 ).send( "The requested resource was not found." );
-});
 
 module.exports = app;

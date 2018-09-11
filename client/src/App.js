@@ -39,6 +39,7 @@ class App extends Component {
         return res.json()
       })
       .then(( json ) => {
+        console.log( "getSightings json", json);
         let sightings = json.map(( sighting ) => {
           let [y,mo,d,h,min] = sighting.date.split(/[-T:Z]/);
           sighting.date = new Date(y, mo - 1, d, h, min);
