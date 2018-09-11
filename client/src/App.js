@@ -56,7 +56,7 @@ class App extends Component {
     this.setState({ id: id });
   }
 
-  editItem( id ) {
+  editItem() {
     this.setState({ isEditForm: true });
   }
 
@@ -93,7 +93,7 @@ class App extends Component {
             path="/:id"
             render={props => ( item == null
               ? <Redirect to="/" />
-              : <Stalk { ...props } item={ item } onEdit={( id ) => this.editItem( id )} onDelete={( id ) => this.deleteItem( id )} />
+              : <Stalk { ...props } item={ item } onEdit={this.editItem} onDelete={( id ) => this.deleteItem( id )} />
             )}
           />
           <Route
