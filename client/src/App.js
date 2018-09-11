@@ -28,12 +28,6 @@ class App extends Component {
     });
   }
 
-  /*
-   * Note: this method is all screwed up. It was working, and then the error
-   * handling fixes in the back end broke it. The data is fetched but it
-   * doesn't render.
-   *
-   */
   getSightings() {
     fetch( config.apiURL[ process.env.NODE_ENV || 'development' ], { mode: 'cors' })
       .then(( res ) => {
@@ -44,17 +38,15 @@ class App extends Component {
 
         return res.json()
       })
-      // .then(( json ) => {
-      //   console.log( "getSightings json", json);
-      //   let sightings = json.map(( sighting ) => {
-      //     let [y,mo,d,h,min] = sighting.date.split(/[-T:Z]/);
-      //     sighting.date = new Date(y, mo - 1, d, h, min);
-      //     return sighting;
-      //   });
-      //   return sightings;
-      // })
+      .then(( json ) => {
+        let sightings = json.map(( sighting ) => {
+          let [y,mo,d,h,min] = sighting.date.split(/[-T:Z]/);
+          sighting.date = new Date(y, mo - 1, d, h, min);
+          return sighting;
+        });
+        return sightings;
+      })
       .then(( sightings ) => {
-        console.log("getSightings sightings", sightings);
         this.setState({ sightings: sightings });
       })
       .catch( e => console.error( e.stack ));
