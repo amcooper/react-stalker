@@ -5,8 +5,11 @@ const port = process.env.PORT || 3033;
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const routes = require( './app/routes' );
 
-app.use(morgan('combined'));
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('combined'));
+}
 app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -18,15 +21,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-require('./app/routes')( app );
-
-app.get('/', function( request, response ) {
-	response.json('Slash route is go.');
-});
-
-app.use(( request, response, next ) => {
-  response.status( 404 ).send( "The requested resource was not found." );
-});
+app.use( '/api/v1', routes );
 
 if (process.env.NODE_ENV === "development" ) {
   app.use(( error, request, response, next ) => {
@@ -48,5 +43,15 @@ app.use(( error, request, response, next ) => {
   next();
 });
 
-app.listen( port );
-console.log(`A quokka is listening on port ${port}.`);
+if ( process.env.NODE_ENV !== "test" ) {
+  app.listen( port, () => {
+    console.log(`A quokka is listening on port ${port}.`);
+    console.log(`${process.env.NODE_ENV} - ${process.env.PORT}`);
+  });
+};
+
+app.use(( request, response, next ) => {
+  response.status( 404 ).send( "The requested resource was not found." );
+});
+
+module.exports = app;
