@@ -23,6 +23,19 @@ app.use(function(req, res, next) {
 
 app.use( '/api/v1', routes );
 
+app.use(( error, request, response, next ) => {
+  response.status( error.status || 500 );
+  response.json({
+    message: error.message,
+    error: process.env.NODE_ENV === "development" ? error : {}
+  });
+  next();
+});
+
+app.use(( request, response, next ) => {
+  response.status( 404 ).send( "The requested resource was not found." );
+});
+
 if ( process.env.NODE_ENV !== "test" ) {
   app.listen( port, () => {
     console.log(`A quokka is listening on port ${port}.`);
