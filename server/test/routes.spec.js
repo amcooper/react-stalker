@@ -97,7 +97,13 @@ describe( "API routes", function() {
   describe( "POST /api/v1/sightings", function() {
 
     it( "should add a new sighting", async () => {
-      const newSighting = await request( server ).post( "/api/v1/sightings" ).send({ celebrity: "Zephyr Teachout" });
+      const newSighting = await request( server ).post( "/api/v1/sightings" ).send({ celebrity: "Zephyr Teachout",
+      stalker: "Bing Cherry",
+      date: Date("2018-09-11 13:04:00 -4:00"),
+      location: "Gun Hill Rd",
+      comment: "On fire"});
+      expect( newSighting.body ).to.be.an( "object" );
+      const response = await request( server ).get( "/api/v1/sightings" );
     });
   });
 
