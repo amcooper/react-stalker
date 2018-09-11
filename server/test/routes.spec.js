@@ -7,24 +7,19 @@ const server = require( "../server" );
 const knex = require( "../config/bookshelf" )["knex"];
 
 describe( "API routes", function() {
-  beforeEach( function( done ) {
-    knex.migrate.rollback().then( function() {
-      knex.migrate.latest().then( function() {
-        return knex.seed.run().then( function() {
-          done();
-        });
-      });
-    });
+
+  beforeEach( "Migrate and seed the test database", async function() {
+    await knex.migrate.rollback();
+    await knex.migrate.latest();
+    await knex.seed.run();
   });
 
-  afterEach( function(done) {
-    knex.migrate.rollback().then( function() {
-      done();
-    });
+  afterEach( "Roll back the database migration", async function() {
+    await knex.migrate.rollback();
   });
 
-  after( function (done) {
-    knex.destroy(done);
+  after( "Drain the database pool", async function () {
+    await knex.destroy();
   });
 
   describe( "GET /api/v1/sightings", function() {
@@ -41,7 +36,7 @@ describe( "API routes", function() {
       expect( response.body[0].stalker ).to.be.a( 'string' );
       expect( response.body[0].stalker ).to.equal( 'Adam Cooper' );
       expect( response.body[0].date ).to.be.a( 'string' );
-      // expect( response.body[0].date ).to.equal( Date(2018,3,21,11,59,59) );
+      expect( response.body[0].date ).to.equal((new Date('2018-03-21 12:59:59-04')).toISOString());
       expect( response.body[0].location ).to.be.a( 'string' );
       expect( response.body[0].location ).to.equal( 'Brooklyn' );
       expect( response.body[0].comment ).to.be.a( 'string' );
@@ -53,7 +48,7 @@ describe( "API routes", function() {
       expect( response.body[1].stalker ).to.be.a( 'string' );
       expect( response.body[1].stalker ).to.equal( 'Aretha Cooper' );
       expect( response.body[1].date ).to.be.a( 'string' );
-      // expect( response.body[1].date ).to.equal( Date(2018,3,21,11,59,59) );
+      expect( response.body[1].date ).to.equal((new Date('2018-03-20 12:59:59-04')).toISOString());
       expect( response.body[1].location ).to.be.a( 'string' );
       expect( response.body[1].location ).to.equal( 'Philadelphia' );
       expect( response.body[1].comment ).to.be.a( 'string' );
@@ -65,7 +60,7 @@ describe( "API routes", function() {
       expect( response.body[2].stalker ).to.be.a( 'string' );
       expect( response.body[2].stalker ).to.equal( 'Alan Cooper' );
       expect( response.body[2].date ).to.be.a( 'string' );
-      // expect( response.body[2].date ).to.equal( Date(2018,3,21,11,59,59) );
+      expect( response.body[2].date ).to.equal((new Date('2018-03-02 11:59:59-05')).toISOString());
       expect( response.body[2].location ).to.be.a( 'string' );
       expect( response.body[2].location ).to.equal( 'Baltimore' );
       expect( response.body[2].comment ).to.be.a( 'string' );
@@ -85,7 +80,7 @@ describe( "API routes", function() {
       expect( response.body.stalker ).to.be.a( 'string' );
       expect( response.body.stalker ).to.equal( 'Adam Cooper' );
       expect( response.body.date ).to.be.a( 'string' );
-      // expect( response.body.date ).to.equal( Date(2018,3,21,11,59,59) );
+      expect( response.body.date ).to.equal((new Date('2018-03-21 12:59:59-04')).toISOString());
       expect( response.body.location ).to.be.a( 'string' );
       expect( response.body.location ).to.equal( 'Brooklyn' );
       expect( response.body.comment ).to.be.a( 'string' );
@@ -96,14 +91,14 @@ describe( "API routes", function() {
   describe( "POST /api/v1/sightings", function() {
 
     it( "should add a new sighting", async () => {
-      const newSighting = await request( server ).post( "/api/v1/sightings" ).send({
+      const postResponse = await request( server ).post( "/api/v1/sightings" ).send({
         celebrity: "Zephyr Teachout",
         stalker: "Bing Cherry",
         date: "2018-09-11 13:04:00 -4:00",
         location: "Gun Hill Rd",
         comment: "On fire"
       });
-      expect( newSighting.body ).to.be.an( "object" );
+      expect( postResponse.statusCode ).to.equal( 200 );
       const response = await request( server ).get( "/api/v1/sightings" );
       expect( response.statusCode ).to.equal( 200 );
       expect( response.body ).to.be.an('array');
@@ -127,11 +122,11 @@ describe( "API routes", function() {
   describe( "PUT /api/v1/sightings/1", function() {
 
     it( "should change an existing sighting", async () => {
-      const updatedSighting = await request( server ).put( "/api/v1/sightings/1" ).send({
+      const putResponse = await request( server ).put( "/api/v1/sightings/1" ).send({
         stalker: "The Adam Cooper",
         location: "Canarsie Pier, Brooklyn, New York, USA"
       });
-      expect( updatedSighting.statusCode ).to.equal( 200 );
+      expect( putResponse.statusCode ).to.equal( 200 );
       const response = await request( server ).get( "/api/v1/sightings/1" );
       expect( response.statusCode ).to.equal( 200 );
       expect( response.body ).to.be.an( "object" );
