@@ -97,13 +97,31 @@ describe( "API routes", function() {
   describe( "POST /api/v1/sightings", function() {
 
     it( "should add a new sighting", async () => {
-      const newSighting = await request( server ).post( "/api/v1/sightings" ).send({ celebrity: "Zephyr Teachout",
-      stalker: "Bing Cherry",
-      date: Date("2018-09-11 13:04:00 -4:00"),
-      location: "Gun Hill Rd",
-      comment: "On fire"});
+      const newSighting = await request( server ).post( "/api/v1/sightings" ).send({ 
+        celebrity: "Zephyr Teachout",
+        stalker: "Bing Cherry",
+        date: "2018-09-11 13:04:00 -4:00",
+        location: "Gun Hill Rd",
+        comment: "On fire"
+      });
       expect( newSighting.body ).to.be.an( "object" );
       const response = await request( server ).get( "/api/v1/sightings" );
+      expect( response.statusCode ).to.equal( 200 );
+      expect( response.body ).to.be.an('array');
+      expect( response.body.length ).to.equal( 4 );
+      expect( response.body[3] ).to.be.an( 'object' );
+      expect( response.body[3] ).to.have.property( 'id' );
+      expect( response.body[3].id ).to.be.a( 'number' );
+      expect( response.body[3] ).to.have.property( 'celebrity' );
+      expect( response.body[3].celebrity ).to.equal( 'Zephyr Teachout' );
+      expect( response.body[3] ).to.have.property( 'stalker' );
+      expect( response.body[3].stalker ).to.equal( 'Bing Cherry' );
+      expect( response.body[3] ).to.have.property( 'date' );
+      expect( response.body[3].date ).to.equal( '2018-09-11 13:04:00 -04:00' );
+      expect( response.body[3] ).to.have.property( 'location' );
+      expect( response.body[3].location ).to.equal( 'Gun Hill Rd');
+      expect( response.body[3] ).to.have.property( 'comment' );
+      expect( response.body[3].comment ).to.equal( 'On fire' );
     });
   });
 
