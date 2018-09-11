@@ -96,7 +96,9 @@ describe( "API routes", function() {
 
   describe( "POST /api/v1/sightings", function() {
 
-    it( "should add a new sighting", async () => {});
+    it( "should add a new sighting", async () => {
+      const newSighting = await request( server ).post( "/api/v1/sightings" ).send({ celebrity: "Zephyr Teachout" });
+    });
   });
 
   describe( "PUT /api/v1/sightings/1", function() {
