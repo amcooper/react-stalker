@@ -5,7 +5,15 @@
     "es6": true
   },
   "parserOptions": {
-      "ecmaVersion": 2017,
-      "sourceType": "module"
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/prop-types": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "15.0"
+    }
   }
 }
