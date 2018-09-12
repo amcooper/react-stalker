@@ -1,0 +1,11 @@
+{
+  "extends": ["plugin:prettier/recommended", "plugin:react/recommended"],
+  "env": {
+    "mocha": true,
+    "es6": true
+  },
+  "parserOptions": {
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+  }
+}
