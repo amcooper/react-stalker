@@ -30,7 +30,8 @@
     "serve-api": "nodemon server/server.js &",
     "dev": "yarn run serve-api && cd client && yarn run serve-client",
     "test": "mocha ./server/test",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepush": "yarn run test"
   },
   "lint-staged": {
     "*.js": ["eslint --fix", "git add"]
