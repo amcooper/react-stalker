@@ -186,7 +186,8 @@ describe("API routes", function() {
         "/api/v1/sightings/1"
       );
       expect(deletedSighting.statusCode).to.equal(200);
-      expect(deletedSighting.body).to.be.an("object");
+      expect(deletedSighting.body).to.be.an("array");
+      expect(deletedSighting.body.length).to.equal(1);
       const response = await request(server).get("/api/v1/sightings");
       expect(response.statusCode).to.equal(200);
       expect(response.body).to.be.an("array");
