@@ -4,7 +4,7 @@ const { expect } = require("chai");
 const request = require("supertest");
 
 const server = require("../server");
-const knex = require("../config/bookshelf")["knex"];
+const knex = require("../config/database");
 
 describe("API routes", function() {
   beforeEach("Migrate and seed the test database", async function() {
@@ -186,7 +186,8 @@ describe("API routes", function() {
         "/api/v1/sightings/1"
       );
       expect(deletedSighting.statusCode).to.equal(200);
-      expect(deletedSighting.body).to.be.an("object");
+      expect(deletedSighting.body).to.be.an("array");
+      expect(deletedSighting.body.length).to.equal(1);
       const response = await request(server).get("/api/v1/sightings");
       expect(response.statusCode).to.equal(200);
       expect(response.body).to.be.an("array");
