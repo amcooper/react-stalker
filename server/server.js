@@ -6,7 +6,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const cors = require("cors");
-const routes = require("./app/routes");
+const routes = require("./app/routes/sightings");
 
 if (process.env.NODE_ENV !== "test") {
   app.use(morgan("combined"));

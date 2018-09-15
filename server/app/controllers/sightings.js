@@ -1,4 +1,4 @@
-const sightingModel = require("./models/sighting");
+const sightingModel = require("../models/sighting");
 const express = require("express");
 
 const index = (request, response, next) => {
