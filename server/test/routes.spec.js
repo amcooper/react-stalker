@@ -169,7 +169,7 @@ describe("API routes", function() {
       expect(response.body.comment).to.equal("Mr. Bean!");
     });
 
-    it("should return an error on an attempt to change the id of an existing sighting", async () => {
+    xit("should return an error on an attempt to change the id of an existing sighting", async () => {
       const putResponse = await request(server)
         .put("/api/v1/sightings/1")
         .send({
