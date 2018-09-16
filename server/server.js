@@ -1,12 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3033;
+const port = process.env.PORT; // || 3033;
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const cors = require("cors");
-const routes = require("./app/routes");
+const routes = require("./app/routes/sightings");
 
 if (process.env.NODE_ENV !== "test") {
   app.use(morgan("combined"));
@@ -31,12 +31,5 @@ app.use((error, request, response, next) => {
 app.use((request, response, next) => {
   response.status(404).send("The requested resource was not found.");
 });
-
-if (process.env.NODE_ENV !== "test") {
-  app.listen(port, () => {
-    console.log(`A quokka is listening on port ${port}.`);
-    console.log(`${process.env.NODE_ENV} - ${process.env.PORT}`);
-  });
-}
 
 module.exports = app;
