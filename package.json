@@ -27,7 +27,7 @@
     "supertest": "^3.3.0"
   },
   "scripts": {
-    "serve-api": "nodemon server/server.js &",
+    "serve-api": "nodemon server/index.js &",
     "dev": "yarn run serve-api && cd client && yarn run serve-client",
     "test": "NODE_ENV=test mocha ./server/test",
     "precommit": "lint-staged",
