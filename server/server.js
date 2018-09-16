@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3033;
+const port = process.env.PORT; // || 3033;
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
