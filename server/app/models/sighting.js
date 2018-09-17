@@ -8,7 +8,7 @@ const show = id =>
     .where("id", id);
 
 const create = data => {
-  if (data.celebrity || data.stalker || data.location || data.date) {
+  if (!data.celebrity || !data.stalker || !data.location || !data.date) {
     return Promise.reject(
       new Error(
         "The celebrity, stalker, location, and date fields may not be blank. The record was not saved."
