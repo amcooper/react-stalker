@@ -29,7 +29,9 @@ app.use((error, request, response, next) => {
 });
 
 app.use((request, response, next) => {
-  response.status(404).send("The requested resource was not found.");
+  if (!response.headersSent) {
+    response.status(404).send("The requested resource was not found.");
+  }
 });
 
 module.exports = app;
