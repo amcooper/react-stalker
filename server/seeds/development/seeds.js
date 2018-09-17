@@ -18,8 +18,8 @@ exports.seed = function(knex, Promise) {
           date: "2018-03-20 11:59:59 -5:00",
           location: "Philadelphia",
           comment: "Congrats.",
-          created_at: "2018-03-21 11:59:59 -5:00",
-          updated_at: "2018-03-21 11:59:59 -5:00"
+          created_at: "2018-03-24 11:59:59 -5:00",
+          updated_at: "2018-03-24 11:59:59 -5:00"
         },
         {
           celebrity: "Mary J. Blige",
@@ -27,8 +27,8 @@ exports.seed = function(knex, Promise) {
           date: "2018-03-2 11:59:59 -5:00",
           location: "Baltimore",
           comment: "Extra foam",
-          created_at: "2018-03-21 11:59:59 -5:00",
-          updated_at: "2018-03-21 11:59:59 -5:00"
+          created_at: "2018-03-27 11:59:59 -5:00",
+          updated_at: "2018-03-27 11:59:59 -5:00"
         }
       ]);
     });

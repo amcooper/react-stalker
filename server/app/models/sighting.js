@@ -10,7 +10,11 @@ const show = id =>
 const create = data =>
   knex("sightings")
     .returning("*")
-    .insert(data);
+    .insert({
+      ...data,
+      created_at: (new Date()).toISOString(),
+      updated_at: (new Date()).toISOString()
+    });
 
 const update = (id, data) =>
   knex("sightings")
