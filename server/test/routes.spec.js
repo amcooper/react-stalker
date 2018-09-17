@@ -75,9 +75,9 @@ describe("API routes", function() {
     });
   });
 
-  describe("GET /api/v1/sightings/1", function() {
-    it("should return the sighting whose id is 1", async () => {
-      const response = await request(server).get("/api/v1/sightings/1");
+  describe("GET /api/v1/sightings/3", function() {
+    it("should return the sighting whose id is 3", async () => {
+      const response = await request(server).get("/api/v1/sightings/3");
       expect(response.statusCode).to.equal(200);
       expect(response.body).to.be.an("object");
       expect(response.body.id).to.be.a("number");
@@ -112,21 +112,21 @@ describe("API routes", function() {
       expect(response.statusCode).to.equal(200);
       expect(response.body).to.be.an("array");
       expect(response.body.length).to.equal(4);
-      expect(response.body[3]).to.be.an("object");
-      expect(response.body[3]).to.have.property("id");
-      expect(response.body[3].id).to.be.a("number");
-      expect(response.body[3]).to.have.property("celebrity");
-      expect(response.body[3].celebrity).to.equal("Zephyr Teachout");
-      expect(response.body[3]).to.have.property("stalker");
-      expect(response.body[3].stalker).to.equal("Bing Cherry");
-      expect(response.body[3]).to.have.property("date");
-      expect(response.body[3].date).to.equal(
+      expect(response.body[0]).to.be.an("object");
+      expect(response.body[0]).to.have.property("id");
+      expect(response.body[0].id).to.be.a("number");
+      expect(response.body[0]).to.have.property("celebrity");
+      expect(response.body[0].celebrity).to.equal("Zephyr Teachout");
+      expect(response.body[0]).to.have.property("stalker");
+      expect(response.body[0].stalker).to.equal("Bing Cherry");
+      expect(response.body[0]).to.have.property("date");
+      expect(response.body[0].date).to.equal(
         new Date("2018-09-11 13:04:00 -04:00").toISOString()
       );
-      expect(response.body[3]).to.have.property("location");
-      expect(response.body[3].location).to.equal("Gun Hill Rd");
-      expect(response.body[3]).to.have.property("comment");
-      expect(response.body[3].comment).to.equal("On fire");
+      expect(response.body[0]).to.have.property("location");
+      expect(response.body[0].location).to.equal("Gun Hill Rd");
+      expect(response.body[0]).to.have.property("comment");
+      expect(response.body[0].comment).to.equal("On fire");
     });
 
     it("should return an error on an attempt to add bad data", async () => {
@@ -140,16 +140,16 @@ describe("API routes", function() {
     });
   });
 
-  describe("PUT /api/v1/sightings/1", function() {
+  describe("PUT /api/v1/sightings/3", function() {
     it("should change an existing sighting", async () => {
       const putResponse = await request(server)
-        .put("/api/v1/sightings/1")
+        .put("/api/v1/sightings/3")
         .send({
           stalker: "The Adam Cooper",
           location: "Canarsie Pier, Brooklyn, New York, USA"
         });
       expect(putResponse.statusCode).to.equal(200);
-      const response = await request(server).get("/api/v1/sightings/1");
+      const response = await request(server).get("/api/v1/sightings/3");
       expect(response.statusCode).to.equal(200);
       expect(response.body).to.be.an("object");
       expect(response.body).to.have.property("stalker");
@@ -163,7 +163,7 @@ describe("API routes", function() {
       expect(response.body.celebrity).to.equal("Rowan Atkinson");
       expect(response.body).to.have.property("date");
       expect(response.body.date).to.equal(
-        new Date("2018-03-21 12:59:59-04").toISOString()
+        new Date("2018-03-21 11:59:59-05").toISOString()
       );
       expect(response.body).to.have.property("comment");
       expect(response.body.comment).to.equal("Mr. Bean!");
