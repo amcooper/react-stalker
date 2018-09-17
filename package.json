@@ -23,13 +23,14 @@
     "lint-staged": "^7.2.2",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
+    "nyc": "^13.0.1",
     "prettier": "1.14.2",
     "supertest": "^3.3.0"
   },
   "scripts": {
     "serve-api": "nodemon server/index.js &",
     "dev": "yarn run serve-api && cd client && yarn run serve-client",
-    "test": "NODE_ENV=test mocha ./server/test",
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha ./server/test",
     "precommit": "lint-staged",
     "prepush": "yarn run test"
   },
