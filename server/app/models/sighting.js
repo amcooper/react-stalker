@@ -12,15 +12,18 @@ const create = data =>
     .returning("*")
     .insert({
       ...data,
-      created_at: (new Date()).toISOString(),
-      updated_at: (new Date()).toISOString()
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     });
 
 const update = (id, data) =>
   knex("sightings")
     .returning("*")
     .where("id", id)
-    .update(data);
+    .update({
+      ...data,
+      updated_at: new Date().toISOString()
+    });
 
 const destroy = id =>
   knex("sightings")
