@@ -7,14 +7,27 @@ const show = id =>
     .returning("*")
     .where("id", id);
 
-const create = data =>
-  knex("sightings")
-    .returning("*")
-    .insert({
-      ...data,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    });
+const create = data => {
+  if (
+    data.celebrity === null ||
+    data.celebrity === undefined ||
+    data.celebrity === ""
+  ) {
+    return Promise.reject(
+      new Error(
+        "The Celebrity field may not be blank, so the record was not saved."
+      )
+    );
+  } else {
+    return knex("sightings")
+      .returning("*")
+      .insert({
+        ...data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
+  }
+};
 
 const update = (id, data) =>
   knex("sightings")
