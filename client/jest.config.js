@@ -77,7 +77,7 @@ module.exports = {
       "<rootDir>/__mocks__/fileMock.js",
     "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     // "App": "<rootDir>/src/App.js"
-  }
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -125,6 +125,7 @@ module.exports = {
 
   // The path to a module that runs some code to configure or set up the testing framework before each test
   // setupTestFrameworkScriptFile: null,
+  setupTestFrameworkScriptFile: "<rootDir>/testSetup.js"
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
