@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stalk component renders the stalk correctly renders correctly 1`] = `
+<div
+  id="Stalk"
+>
+  <p>
+    <button
+      onClick={[Function]}
+    >
+      edit
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      delete
+    </button>
+    Terrell Devereaux
+     spotted 
+    Katherine Zellner
+     on 
+    Wed Sep 19 2018
+     in 
+    Indianapolis
+    : "
+    Win win win!
+    "
+  </p>
+</div>
+`;
