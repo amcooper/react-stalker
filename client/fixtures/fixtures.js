@@ -1,8 +1,8 @@
 module.exports = {
   stalkList: [{
-    id: 1
-    celebrity:
-    stalker:
+    id: 1,
+    celebrity: "Rosie Perez",
+    stalker: "Terrell Devereaux",
     date:
     location:
     comment:
