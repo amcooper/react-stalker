@@ -1,7 +1,25 @@
 module.exports = {
   stalkList: [{
-    id:
-    
+    id: 1
+    celebrity:
+    stalker:
+    date:
+    location:
+    comment:
+  },{
+    id: 2
+    celebrity:
+    stalker:
+    date:
+    location:
+    comment:
+  },{
+    id: 3
+    celebrity:
+    stalker:
+    date:
+    location:
+    comment:
   }]
 }
 
