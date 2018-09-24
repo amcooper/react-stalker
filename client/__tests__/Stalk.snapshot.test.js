@@ -13,8 +13,6 @@ describe("Stalk component renders the stalk correctly", () => {
       comment: "Win win win!"
     };
 
-    const { id, celebrity, stalker, location, date, comment } = testStalk;
-
     const rendered = renderer.create(<Stalk item={testStalk} />);
 
     expect(rendered.toJSON()).toMatchSnapshot();
