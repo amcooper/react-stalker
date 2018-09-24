@@ -3,9 +3,9 @@ module.exports = {
     id: 1,
     celebrity: "Rosie Perez",
     stalker: "Terrell Devereaux",
-    date:
-    location:
-    comment:
+    date: "2018-04-24";
+    location: "Vinegar Hill",
+    comment: "Holla"
   },{
     id: 2
     celebrity:
