@@ -1,13 +1,13 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import StalkListItem from "../src/StalkListItem";
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("StalkListItem component", () => {
-  fit("Stalk list item's focus button works", () => {
+  it("Stalk list item's focus button works", () => {
     const spy = jest.fn();
-    const stalkListItem = shallow(
+    const stalkListItem = mount(
       <MemoryRouter>
         <StalkListItem
           item={stalkList[0]}
