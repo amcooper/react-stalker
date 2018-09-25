@@ -30,7 +30,7 @@
   "scripts": {
     "serve-api": "nodemon server/index.js &",
     "dev": "yarn run serve-api && cd client && yarn run serve-client",
-    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha ./server/test",
+    "test": "NODE_ENV=test npx nyc --reporter=html --reporter=text mocha ./server/test",
     "precommit": "lint-staged",
     "prepush": "yarn run test"
   },
