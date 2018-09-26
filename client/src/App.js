@@ -97,7 +97,7 @@ class App extends Component {
         <Form
           resetAppState={this.resetAppState}
           getSightings={this.getSightings}
-          isEditForm={this.state.isEditForm}
+          isEditForm={this.state.isEditForm} // TODO Refactor; this is probably spurious.
           item={this.state.isEditForm ? item : null}
         />
         <Route
