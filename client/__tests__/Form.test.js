@@ -5,11 +5,6 @@ import { mount } from "enzyme";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("Form component", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
-    ReactDOM.render(<Form />, div);
-  });
-
   describe("Create form", () => {
     it("enters text and submits form", () => {
       const resetSpy = jest.fn();
@@ -23,13 +18,20 @@ describe("Form component", () => {
         />
       );
       const formInstance = formComponent.instance();
-      // formComponent.find("input[name='celebrity']").simulate("change", {target:{value:stalkList[0]["celebrity"]}});
-      formComponent
-        .find("input")
-        .first()
-        .simulate("change", { target: { value: stalkList[0]["celebrity"] } });
-      console.log(`*****\n* state: `, formComponent.state());
-      expect(formComponent.state("celebrity")).to.equal(
+      console.log(
+        formComponent
+          .find("input")
+          .first()
+          .html()
+      );
+      const celebrityInput = formComponent.find("input").first();
+      celebrityInput.simulate("change", {
+        target: {
+          name: celebrityInput.props().name,
+          value: stalkList[0]["celebrity"]
+        }
+      });
+      expect(formComponent.state("celebrity")).toEqual(
         stalkList[0]["celebrity"]
       );
     });
