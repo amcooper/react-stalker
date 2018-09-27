@@ -35,7 +35,7 @@ exports[`Form component renders the form correctly create form 1`] = `
       name="date"
       onChange={[Function]}
       type="datetime-local"
-      value="2018-09-26T11:59:34.666"
+      value="2018-09-26T12:11:24.615"
     />
   </div>
   <div>
@@ -101,7 +101,7 @@ exports[`Form component renders the form correctly edit form 1`] = `
       name="date"
       onChange={[Function]}
       type="datetime-local"
-      value="2018-09-26T11:59:34.675"
+      value="2018-09-26T12:11:24.615"
     />
   </div>
   <div>
@@ -127,7 +127,7 @@ exports[`Form component renders the form correctly edit form 1`] = `
   </div>
   <input
     type="submit"
-    value="Create"
+    value="Update"
   />
 </form>
 `;
