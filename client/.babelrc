@@ -3,5 +3,5 @@
     ["@babel/env", {"modules": false}],
     "@babel/react"
   ],
-  "plugins": ["@babel/transform-modules-commonjs"],
+  "plugins": ["@babel/plugin-transform-modules-commonjs"]
 }

@@ -18,16 +18,23 @@ describe("Form component", () => {
         />
       );
       const formInstance = formComponent.instance();
-      const celebrityInput = formComponent.find("input").first();
-      celebrityInput.simulate("change", {
-        target: {
-          name: celebrityInput.props().name,
-          value: stalkList[0]["celebrity"]
-        }
+      formComponent.find("input").forEach(node => {
+        const name = node.props().name;
+        node.simulate("change", {
+          target: {
+            name,
+            value: stalkList[0][name]
+          }
+        });
       });
-      expect(formComponent.state("celebrity")).toEqual(
-        stalkList[0]["celebrity"]
-      );
+      formComponent
+        .find("textarea")
+        .first()
+        .simulate("change", {
+          target: { name: "comment", value: stalkList[0].comment }
+        });
+      const { id, ...stalkData } = stalkList[0];
+      expect(formComponent.state()).toEqual(stalkData);
     });
   });
 });
