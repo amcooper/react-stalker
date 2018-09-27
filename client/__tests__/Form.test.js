@@ -18,12 +18,6 @@ describe("Form component", () => {
         />
       );
       const formInstance = formComponent.instance();
-      console.log(
-        formComponent
-          .find("input")
-          .first()
-          .html()
-      );
       const celebrityInput = formComponent.find("input").first();
       celebrityInput.simulate("change", {
         target: {
