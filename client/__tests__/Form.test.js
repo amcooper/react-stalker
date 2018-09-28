@@ -9,7 +9,7 @@ describe("Form component", () => {
     it("enters text and submits form", () => {
       const resetSpy = jest.fn();
       const getSpy = jest.fn();
-      const fetch = jest.fn(() => {}); // TODO This should return a promise that resolves to an object, prob. https://jestjs.io/docs/en/mock-functions
+      const fetch = jest.fn(() => {}); // TODO Use fetch-mock
       const formComponent = mount(
         <Form
           resetAppState={resetSpy}
