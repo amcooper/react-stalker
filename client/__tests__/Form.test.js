@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Form from "../src/Form";
 import { mount } from "enzyme";
+import fetchMock from "fetch-mock";
+import Form from "../src/Form";
+import config from "../src/config";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("Form component", () => {
@@ -9,7 +11,15 @@ describe("Form component", () => {
     it("enters text and submits form", () => {
       const resetSpy = jest.fn();
       const getSpy = jest.fn();
-      const fetch = jest.fn(() => {}); // TODO Use fetch-mock
+      fetchMock.post(
+        config.apiURL.development,
+        new Promise(resolve => {
+          resetSpy();
+          getSpy();
+          return resolve(stalkList[0]);
+        }),
+        { name: "sightingspost" }
+      );
       const formComponent = mount(
         <Form
           resetAppState={resetSpy}
@@ -18,7 +28,7 @@ describe("Form component", () => {
           item={null}
         />
       );
-      const formInstance = formComponent.instance();
+      const formInstance = formComponent.instance(); // spurious?
       formComponent.find("input").forEach(node => {
         const name = node.props().name;
         node.simulate("change", {
@@ -37,7 +47,17 @@ describe("Form component", () => {
       const { id, ...stalkData } = stalkList[0];
       expect(formComponent.state()).toEqual(stalkData);
 
-      formComponent.find("input[type='submit']").simulate("click");
+      console.log(formComponent.find("input[type='submit']").html());
+      formComponent
+        .find("input[type='submit']")
+        .simulate("click", { preventDefault: () => {} });
+      // expect(formComponent.find("form").props().handleSubmit).toHaveBeenCalledTimes(1);
+      expect(resetSpy).toHaveBeenCalledTimes(1);
+      expect(getSpy).toHaveBeenCalledTimes(1);
+      console.log(
+        `*****\n* `,
+        fetchMock.calls(undefined, { name: "sightingspost" })
+      );
     });
   });
 });
