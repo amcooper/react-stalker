@@ -9,6 +9,7 @@ describe("Form component", () => {
     it("enters text and submits form", () => {
       const resetSpy = jest.fn();
       const getSpy = jest.fn();
+      const fetch = jest.fn(() => {}); // TODO This should return a promise that resolves to an object, prob. https://jestjs.io/docs/en/mock-functions
       const formComponent = mount(
         <Form
           resetAppState={resetSpy}
@@ -35,6 +36,8 @@ describe("Form component", () => {
         });
       const { id, ...stalkData } = stalkList[0];
       expect(formComponent.state()).toEqual(stalkData);
+
+      formComponent.find("input[type='submit']").simulate("click");
     });
   });
 });
