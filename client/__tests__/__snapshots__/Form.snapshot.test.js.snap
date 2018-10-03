@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form component renders the form correctly create form 1`] = `
+<form
+  id="input-form"
+  onSubmit={[Function]}
+>
+  <div>
+    <label>
+      Celebrity:
+    </label>
+    <input
+      name="celebrity"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label>
+      Stalker:
+    </label>
+    <input
+      name="stalker"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label>
+      Date and time:
+    </label>
+    <input
+      name="date"
+      onChange={[Function]}
+      type="datetime-local"
+      value="2018-09-26T12:11:24.615"
+    />
+  </div>
+  <div>
+    <label>
+      Location:
+    </label>
+    <input
+      name="location"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label>
+      Comment:
+    </label>
+    <textarea
+      name="comment"
+      onChange={[Function]}
+      value=""
+    />
+  </div>
+  <input
+    type="submit"
+    value="Create"
+  />
+</form>
+`;
+
+exports[`Form component renders the form correctly edit form 1`] = `
+<form
+  id="input-form"
+  onSubmit={[Function]}
+>
+  <div>
+    <label>
+      Celebrity:
+    </label>
+    <input
+      name="celebrity"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label>
+      Stalker:
+    </label>
+    <input
+      name="stalker"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label>
+      Date and time:
+    </label>
+    <input
+      name="date"
+      onChange={[Function]}
+      type="datetime-local"
+      value="2018-09-26T12:11:24.615"
+    />
+  </div>
+  <div>
+    <label>
+      Location:
+    </label>
+    <input
+      name="location"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <div>
+    <label>
+      Comment:
+    </label>
+    <textarea
+      name="comment"
+      onChange={[Function]}
+      value=""
+    />
+  </div>
+  <input
+    type="submit"
+    value="Update"
+  />
+</form>
+`;

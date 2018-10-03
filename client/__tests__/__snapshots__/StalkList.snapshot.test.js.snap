@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StalkList component renders the stalk list correctly renders correctly 1`] = `
+<ul
+  id="StalkList"
+>
+  <li>
+    <a
+      href="/1"
+      onClick={[Function]}
+    >
+      <div
+        className="StalkListItem"
+        onClick={[Function]}
+      >
+        <p>
+          Rosie Perez
+           on 
+          Mon Apr 23 2018
+        </p>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="/2"
+      onClick={[Function]}
+    >
+      <div
+        className="StalkListItem"
+        onClick={[Function]}
+      >
+        <p>
+          Angela Bassett
+           on 
+          Sat Mar 24 2018
+        </p>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a
+      href="/3"
+      onClick={[Function]}
+    >
+      <div
+        className="StalkListItem"
+        onClick={[Function]}
+      >
+        <p>
+          Greg Luzinski
+           on 
+          Sun Feb 25 2018
+        </p>
+      </div>
+    </a>
+  </li>
+</ul>
+`;
