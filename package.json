@@ -28,12 +28,14 @@
     "supertest": "^3.3.0"
   },
   "scripts": {
-    "serve-api": "nodemon server/index.js &",
-    "dev": "yarn run serve-api && cd client && yarn run serve-client",
+    "build-client": "cd ./client && yarn build",
+    "dev": "yarn run serve-client && nodemon ./server/index.js",
     "test": "NODE_ENV=test npx nyc --reporter=html --reporter=text mocha ./server/test",
     "precommit": "lint-staged",
     "prepush": "yarn run test",
-    "start": "node server/index.js && cd client && yarn run build"
+    "postinstall": "cd ./client && yarn",
+    "serve-client": "cd ./client && yarn start",
+    "start": "yarn run build-client && node ./server/index.js"
   },
   "lint-staged": {
     "*.js": [
