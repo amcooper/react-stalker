@@ -29,6 +29,7 @@ describe("Form component", () => {
         />
       );
       const formInstance = formComponent.instance(); // spurious?
+      jest.spyOn(formInstance, "handleSubmit");
       formComponent.find("input").forEach(node => {
         const name = node.props().name;
         node.simulate("change", {
@@ -52,6 +53,7 @@ describe("Form component", () => {
         .find("input[type='submit']")
         .simulate("click", { preventDefault: () => {} });
       // expect(formComponent.find("form").props().handleSubmit).toHaveBeenCalledTimes(1);
+      expect(formInstance.handleSubmit).toHaveBeenCalled();
       expect(resetSpy).toHaveBeenCalledTimes(1);
       expect(getSpy).toHaveBeenCalledTimes(1);
       console.log(
