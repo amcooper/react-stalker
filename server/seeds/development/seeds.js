@@ -24,7 +24,7 @@ exports.seed = function(knex, Promise) {
         {
           celebrity: "Mary J. Blige",
           stalker: "Alan Cooper",
-          date: "2018-03-2 11:59:59 -5:00",
+          date: "2018-03-22 11:59:59 -5:00",
           location: "Baltimore",
           comment: "Extra foam",
           created_at: "2018-03-27 11:59:59 -5:00",
