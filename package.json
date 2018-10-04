@@ -35,12 +35,8 @@
     "prepush": "yarn run test",
     "postinstall": "cd ./client && yarn",
     "serve-client": "cd ./client && yarn start",
-<<<<<<< HEAD
-    "start": "npx http-server ./client/public && node ./server/index.js",
-=======
     "start": "node server",
     "heroku-postbuild": "cd ./client && yarn",
->>>>>>> issue-60
     "test-client": "cd ./client && yarn test"
   },
   "lint-staged": {
