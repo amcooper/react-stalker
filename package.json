@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build-client": "cd ./client && yarn run build",
-    "dev": "yarn run serve-client && nodemon ./server/index.js",
+    "dev": "yarn run serve-client & nodemon ./server/index.js",
     "test": "NODE_ENV=test npx nyc --reporter=html --reporter=text mocha ./server/test",
     "precommit": "lint-staged",
     "prepush": "yarn run test",

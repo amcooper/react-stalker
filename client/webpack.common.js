@@ -8,7 +8,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(["public"]),
-    new HtmlWebpackPlugin({ title: "Production" })
+    new HtmlWebpackPlugin({ template: "index.html" })
   ],
   output: {
     filename: "[name].bundle.js",
