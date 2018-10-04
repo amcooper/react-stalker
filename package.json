@@ -35,7 +35,8 @@
     "prepush": "yarn run test",
     "postinstall": "cd ./client && yarn",
     "serve-client": "cd ./client && yarn start",
-    "start": "yarn run build-client && node ./server/index.js",
+    "start": "node server",
+    "heroku-postbuild": "cd ./client && yarn",
     "test-client": "cd ./client && yarn test"
   },
   "lint-staged": {

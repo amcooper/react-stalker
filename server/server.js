@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const cors = require("cors");
+const path = require("path");
 const routes = require("./app/routes/sightings");
 
 if (process.env.NODE_ENV !== "test") {
@@ -17,7 +18,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
 
+app.use(express.static(path.resolve(__dirname, "..", "client", "public")));
+
 app.use("/api/v1", routes);
+
+app.get("*", (request, response) => {
+  response.sendFile(
+    path.resolve(__dirname, "..", "client", "public", "index.html")
+  );
+});
 
 app.use((error, request, response, next) => {
   response.status(error.status || 500);
