@@ -35,7 +35,7 @@
     "prepush": "yarn run test",
     "postinstall": "cd ./client && yarn",
     "serve-client": "cd ./client && yarn start",
-    "start": "yarn run build-client && node ./server/index.js",
+    "start": "npx http-server ./client/public && node ./server/index.js",
     "test-client": "cd ./client && yarn test"
   },
   "lint-staged": {
