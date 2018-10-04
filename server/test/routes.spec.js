@@ -66,7 +66,7 @@ describe("API routes", function() {
       expect(response.body[2].stalker).to.equal("Alan Cooper");
       expect(response.body[2]).to.have.property("date");
       expect(response.body[2].date).to.equal(
-        new Date("2018-03-02 11:59:59-05").toISOString()
+        new Date("2018-03-22 11:59:59-05").toISOString()
       );
       expect(response.body[2]).to.have.property("location");
       expect(response.body[2].location).to.equal("Baltimore");
