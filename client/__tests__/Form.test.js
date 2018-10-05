@@ -12,7 +12,7 @@ describe("Form component", () => {
       const resetSpy = jest.fn();
       const getSpy = jest.fn();
       fetchMock.post(
-        config.apiURL.development,
+        "api/v1/sightings",
         new Promise(resolve => {
           resetSpy();
           getSpy();

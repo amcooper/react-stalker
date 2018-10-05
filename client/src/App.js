@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import config from "./config.js";
 import {
   BrowserRouter as Router,
   Route,
@@ -34,7 +33,6 @@ class App extends Component {
   }
 
   getSightings() {
-    // fetch(config.apiURL[process.env.NODE_ENV || "development"], {
     fetch("/api/v1/sightings", {
       mode: "cors"
     })
@@ -69,7 +67,7 @@ class App extends Component {
   }
 
   deleteItem(id) {
-    fetch(`${config.apiURL[process.env.NODE_ENV]}/${id}`, {
+    fetch(`api/v1/sightings/${id}`, {
       method: "DELETE",
       mode: "cors"
     })

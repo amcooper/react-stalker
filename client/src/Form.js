@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Form.css";
-import config from "./config";
 
 class Form extends Component {
   constructor(props) {
@@ -35,7 +34,6 @@ class Form extends Component {
 
     event.preventDefault();
 
-    // revert to ${config.apiURL[process.env.NODE_ENV]} if nec.
     let fetchURL = `/api/v1/sightings${
       this.props.isEditForm
         ? `/${this.props.item ? this.props.item.id : ""}`
@@ -108,7 +106,7 @@ class Form extends Component {
           />
         </div>
         <div>
-          <label>Date and time:</label>
+          <label>Date & time:</label>
           <input
             type="datetime-local"
             name="date"
