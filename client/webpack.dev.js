@@ -5,6 +5,9 @@ module.exports = merge(common, {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    contentBase: "./public"
+    contentBase: "./public",
+    proxy: {
+      "/api": `http://localhost:3033`
+    }
   }
 });
