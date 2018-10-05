@@ -5,15 +5,13 @@ exports[`StalkListItem component renders a stalk list item correctly renders cor
   href="/1"
   onClick={[Function]}
 >
-  <div
+  <p
     className="StalkListItem"
     onClick={[Function]}
   >
-    <p>
-      Rosie Perez
-       on 
-      Mon Apr 23 2018
-    </p>
-  </div>
+    Rosie Perez
+     on 
+    Mon Apr 23 2018
+  </p>
 </a>
 `;

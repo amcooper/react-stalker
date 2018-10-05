@@ -29,7 +29,7 @@ exports[`Form component renders the form correctly create form 1`] = `
   </div>
   <div>
     <label>
-      Date and time:
+      Date & time:
     </label>
     <input
       name="date"
@@ -95,7 +95,7 @@ exports[`Form component renders the form correctly edit form 1`] = `
   </div>
   <div>
     <label>
-      Date and time:
+      Date & time:
     </label>
     <input
       name="date"

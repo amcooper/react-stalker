@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { mount } from "enzyme";
 import fetchMock from "fetch-mock";
 import Form from "../src/Form";
-import config from "../src/config";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("Form component", () => {
