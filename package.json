@@ -33,7 +33,7 @@
     "test": "NODE_ENV=test npx nyc --reporter=html --reporter=text mocha ./server/test",
     "precommit": "lint-staged",
     "prepush": "yarn run test",
-    "postinstall": "echo Commenting out postinstall script: 'cd ./client && yarn'",
+    "postinstall": "cd ./client && yarn",
     "serve-client": "cd ./client && yarn start",
     "start": "node server",
     "heroku-postbuild": "yarn run build-client",
