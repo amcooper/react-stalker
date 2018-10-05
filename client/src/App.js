@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   getSightings() {
-    fetch("/api/v1/sightings", {
+    fetch(config.apiURL[process.env.NODE_ENV || "development"], {
       mode: "cors"
     })
       .then(res => {

@@ -4,11 +4,9 @@ import { Link } from "react-router-dom";
 function StalkListItem(props) {
   return (
     <Link to={`/${props.item.id}`}>
-      <div className="StalkListItem" onClick={() => props.onClick()}>
-        <p>
-          {props.item.celebrity} on {props.item.date.toDateString()}
-        </p>
-      </div>
+      <p className="StalkListItem" onClick={() => props.onClick()}>
+        {props.item.celebrity} on {props.item.date.toDateString()}
+      </p>
     </Link>
   );
 }
