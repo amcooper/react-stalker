@@ -35,8 +35,8 @@ class Form extends Component {
 
     event.preventDefault();
 
-    let fetchURL = `
-      ${config.apiURL[process.env.NODE_ENV]}${
+    // revert to ${config.apiURL[process.env.NODE_ENV]} if nec.
+    let fetchURL = `/api/v1/sightings${
       this.props.isEditForm
         ? `/${this.props.item ? this.props.item.id : ""}`
         : ""
