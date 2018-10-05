@@ -6,6 +6,11 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.3.1",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.0",
     "css-loader": "^1.0.0",
     "style-loader": "^0.23.0",
@@ -16,11 +21,6 @@
     "clean-webpack-plugin": "^0.1.19"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.1.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-15": "^1.1.0",
