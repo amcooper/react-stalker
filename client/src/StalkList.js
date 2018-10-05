@@ -13,7 +13,7 @@ class StalkList extends Component {
       </li>
     ));
 
-    return <ul id="StalkList">{itemList}</ul>;
+    return <ul className="StalkList">{itemList}</ul>;
   }
 }
 
