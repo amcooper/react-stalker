@@ -1,9 +1,9 @@
 require("dotenv").config();
-import express = require("express");
+import express from "express";
 const app = express();
 const port = process.env.PORT; // || 3033;
-import morgan = require("morgan");
-import bodyParser = require("body-parser");
+import morgan from "morgan";
+import bodyParser from "body-parser";
 import methodOverride = require("method-override");
 import cors = require("cors");
 import path = require("path");
