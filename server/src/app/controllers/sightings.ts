@@ -1,14 +1,14 @@
 import sightingModel from "../models/sighting";
 import express, { NextFunction } from "express";
 
-const index = (request:Request, response:Response, next:NextFunction) => {
+const index = (request: Request, response: Response, next: NextFunction) => {
   sightingModel
     .index()
-    .then(res => response.json(res))
+    .then((res:any) => { return response.json(res); })
     .catch(e => next(e));
 };
 
-const show = (request, response, next) => {
+const show = (request: Request, response: Response, next: NextFunction) => {
   sightingModel
     .show(request.params.id)
     .then(res => response.json(res[0]))

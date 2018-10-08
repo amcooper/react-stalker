@@ -1,13 +1,23 @@
-import * as knex from "../../config/database";
+import knex from "../../config/database";
 
-let index = function() => knex("sightings").orderBy("created_at", "desc");
+interface Sighting {
+  id: number,
+  celebrity: string,
+  stalker: string,
+  location: string,
+  date: string,
+  comment?: string
+};
 
-const show = id =>
+
+const index = () => knex("sightings").orderBy("created_at", "desc");
+
+const show = (id: number) =>
   knex("sightings")
     .returning("*")
     .where("id", id);
 
-const create = data => {
+const create = (data: Sighting) => {
   if (!data.celebrity || !data.stalker || !data.location || !data.date) {
     return Promise.reject(
       new Error(
@@ -25,7 +35,7 @@ const create = data => {
   }
 };
 
-const update = (id, data) => {
+const update = (id: number, data: Sighting) => {
   const dataValuesArray = Object.values(data);
   if (dataValuesArray.map(value => Boolean(value)).includes(false)) {
     return Promise.reject(
@@ -50,7 +60,7 @@ const update = (id, data) => {
   }
 };
 
-const destroy = id =>
+const destroy = (id: number) =>
   knex("sightings")
     .returning("*")
     .where("id", id)
