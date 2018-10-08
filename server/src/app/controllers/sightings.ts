@@ -1,7 +1,8 @@
-const sightingModel = require("../models/sighting");
-const express = require("express");
+import sightingModel from "../models/sighting";
+import express from "express";
+import { NextFunction } from "express-serve-static-core";
 
-const index = (request, response, next) => {
+const index = (request:Request, response:Response, next:NextFunction) => {
   sightingModel
     .index()
     .then(res => response.json(res))
@@ -36,7 +37,7 @@ const destroy = (request, response, next) => {
     .catch(e_save => next(e_save));
 };
 
-module.exports = {
+export = {
   index,
   show,
   create,

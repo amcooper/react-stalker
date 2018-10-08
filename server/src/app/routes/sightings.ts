@@ -1,4 +1,4 @@
-const sightingsController = require("../controllers/sightings");
+import * as sightingsController from "../controllers/sightings";
 const express = require("express");
 const router = express.Router();
 
@@ -8,4 +8,4 @@ router.post("/sightings", sightingsController.create);
 router.put("/sightings/:id", sightingsController.update);
 router.delete("/sightings/:id", sightingsController.destroy);
 
-module.exports = router;
+export = router;

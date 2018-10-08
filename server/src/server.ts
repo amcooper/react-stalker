@@ -1,13 +1,14 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 const app = express();
-const port = process.env.PORT; // || 3033;
+const port = process.env.PORT;
 import morgan from "morgan";
 import bodyParser from "body-parser";
-import methodOverride = require("method-override");
-import cors = require("cors");
-import path = require("path");
-const routes = require("./app/routes/sightings");
+import methodOverride from "method-override";
+import cors from "cors";
+import path from "path";
+import * as routes from "./app/routes/sightings";
 
 if (process.env.NODE_ENV !== "test") {
   app.use(morgan("combined"));
