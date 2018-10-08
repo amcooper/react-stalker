@@ -1,6 +1,6 @@
 import * as knex from "../../config/database";
 
-const index = () => knex("sightings").orderBy("created_at", "desc");
+let index = function() => knex("sightings").orderBy("created_at", "desc");
 
 const show = id =>
   knex("sightings")
