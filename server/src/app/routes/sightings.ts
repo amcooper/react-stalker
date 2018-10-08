@@ -1,5 +1,5 @@
-import * as sightingsController from "../controllers/sightings";
-const express = require("express");
+import sightingsController from "../controllers/sightings";
+import express from "express";
 const router = express.Router();
 
 router.get("/sightings", sightingsController.index);
