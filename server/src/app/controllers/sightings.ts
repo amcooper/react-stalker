@@ -1,6 +1,5 @@
 import sightingModel from "../models/sighting";
-import express from "express";
-import { NextFunction } from "express-serve-static-core";
+import express, { NextFunction } from "express";
 
 const index = (request:Request, response:Response, next:NextFunction) => {
   sightingModel

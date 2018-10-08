@@ -1,4 +1,4 @@
-const knex = require("../../config/database");
+import * as knex from "../../config/database";
 
 const index = () => knex("sightings").orderBy("created_at", "desc");
 
@@ -56,7 +56,7 @@ const destroy = id =>
     .where("id", id)
     .del();
 
-module.exports = {
+export = {
   index,
   show,
   create,
