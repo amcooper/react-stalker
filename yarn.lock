@@ -173,6 +173,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/errorhandler@^0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/errorhandler/-/errorhandler-0.0.32.tgz#387eca73957b481254baddc15d1d40f7fe7153c6"
+  integrity sha512-wC9CfwPMIzklPd5lEYC8HnQdlMC1PswlohWmEDMWlw+E/rMYuz5eSqKBc72Earb29KptKJrRl77qVRJzrZndww==
+  dependencies:
+    "@types/express" "*"
+
 "@types/eslint-plugin-prettier@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-plugin-prettier/-/eslint-plugin-prettier-2.2.0.tgz#26170ee65ce05d811f3ef6fc2987acd525066c7f"
@@ -310,7 +317,7 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
-accepts@~1.3.5:
+accepts@~1.3.3, accepts@~1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.5.tgz#eb777df6011723a3b14e8a72c0805c8e86746bd2"
   integrity sha1-63d99gEXI6OxTopywIBcjoZ0a9I=
@@ -1228,6 +1235,14 @@ error-ex@^1.3.1:
   integrity sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==
   dependencies:
     is-arrayish "^0.2.1"
+
+errorhandler@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/errorhandler/-/errorhandler-1.5.0.tgz#eaba64ca5d542a311ac945f582defc336165d9f4"
+  integrity sha1-6rpkyl1UKjEayUX1gt78M2Fl2fQ=
+  dependencies:
+    accepts "~1.3.3"
+    escape-html "~1.0.3"
 
 es-abstract@^1.7.0:
   version "1.12.0"
@@ -4479,10 +4494,6 @@ type-is@~1.6.15, type-is@~1.6.16:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.18"
-
-typescript@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.1.tgz#3362ba9dd1e482ebb2355b02dfe8bcd19a2c7c96"
 
 uglify-js@^3.1.4:
   version "3.4.9"

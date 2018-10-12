@@ -1,7 +1,7 @@
 import sightingModel from "../models/sighting";
 import express, { NextFunction } from "express";
 
-const index = (request: Request, response: Response, next: NextFunction): RequestHandlerParams => {
+const index = (request: Request, response: Response, next: NextFunction) => {
   sightingModel
     .index()
     .then((res: Sighting[]) => { return response.json(res); })
