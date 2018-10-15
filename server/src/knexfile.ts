@@ -1,7 +1,7 @@
 // require("dotenv").config();
-const path = require("path");
+import path from "path";
 
-module.exports = {
+export = {
   development: {
     client: "pg",
     connection: "postgres://localhost:5432/react_stalker",
