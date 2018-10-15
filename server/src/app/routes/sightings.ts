@@ -1,4 +1,4 @@
-import sightingsController from "../controllers/sightings";
+import * as sightingsController from "../controllers/sightings";
 import express from "express";
 const router = express.Router();
 

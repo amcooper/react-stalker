@@ -1,6 +1,6 @@
 import Sighting from "../interfaces/sighting";
 import sightingModel = require( "../models/sighting");
-import express, { NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 
 const index = (request: Request, response: Response, next: NextFunction) => {
   sightingModel
