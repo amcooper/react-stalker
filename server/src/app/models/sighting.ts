@@ -8,7 +8,7 @@ const show = (id: number) =>
     .returning("*")
     .where("id", id);
 
-const create = (data: Sighting) => {
+const create = (data: Sighting): Promise<any> | Knex.QueryBuilder<Sighting> => {
   if (!data.celebrity || !data.stalker || !data.location || !data.date) {
     return Promise.reject(
       new Error(
@@ -26,7 +26,7 @@ const create = (data: Sighting) => {
   }
 };
 
-const update = (id: number, data: Sighting) => {
+const update = (id: number, data: Sighting): Promise<any> | Knex.QueryBuilder<Sighting> => {
   const dataValuesArray = Object.values(data);
   if (dataValuesArray.map(value => Boolean(value)).includes(false)) {
     return Promise.reject(
