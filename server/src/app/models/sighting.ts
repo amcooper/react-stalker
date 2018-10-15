@@ -1,3 +1,5 @@
+/// <reference path="../../../../node_modules/@types/knex/index.d.ts">
+
 import knex from "../../config/database";
 import Sighting from "../interfaces/sighting";
 
@@ -8,7 +10,7 @@ const show = (id: number) =>
     .returning("*")
     .where("id", id);
 
-const create = (data: Sighting): Promise<any> | Knex.QueryBuilder<Sighting> => {
+const create = (data: Sighting): Promise<any>|knex.Knex.QueryBuilder<Sighting> => {
   if (!data.celebrity || !data.stalker || !data.location || !data.date) {
     return Promise.reject(
       new Error(

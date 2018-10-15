@@ -4,7 +4,7 @@ const { expect } = require("chai");
 const request = require("supertest");
 
 const server = require("../server");
-const knex = require("../config/database");
+// const knex = require("../config/database");
 
 describe("API routes", function() {
   beforeEach("Migrate and seed the test database", async function() {
