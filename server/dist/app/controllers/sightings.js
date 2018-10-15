@@ -8,7 +8,9 @@ const sighting_1 = __importDefault(require("../models/sighting"));
 const index = (request, response, next) => {
   sighting_1.default
     .index()
-    .then(res => response.json(res))
+    .then(res => {
+      return response.json(res);
+    })
     .catch(e => next(e));
 };
 const show = (request, response, next) => {

@@ -1,7 +1,16 @@
-const knex = require("../../config/database");
-const index = () => knex("sightings").orderBy("created_at", "desc");
+"use strict";
+var __importDefault =
+  (this && this.__importDefault) ||
+  function(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+const database_1 = __importDefault(require("../../config/database"));
+class Sighting {}
+const index = () =>
+  database_1.default("sightings").orderBy("created_at", "desc");
 const show = id =>
-  knex("sightings")
+  database_1
+    .default("sightings")
     .returning("*")
     .where("id", id);
 const create = data => {
@@ -12,14 +21,14 @@ const create = data => {
       )
     );
   } else {
-    return knex("sightings")
+    return database_1
+      .default("sightings")
       .returning("*")
-      .insert(
-        Object.assign({}, data, {
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-      );
+      .insert({
+        ...data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      });
   }
 };
 const update = (id, data) => {
@@ -37,20 +46,24 @@ const update = (id, data) => {
       )
     );
   } else {
-    return knex("sightings")
+    return database_1
+      .default("sightings")
       .returning("*")
       .where("id", id)
-      .update(
-        Object.assign({}, data, { updated_at: new Date().toISOString() })
-      );
+      .update({
+        ...data,
+        updated_at: new Date().toISOString()
+      });
   }
 };
 const destroy = id =>
-  knex("sightings")
+  database_1
+    .default("sightings")
     .returning("*")
     .where("id", id)
     .del();
 module.exports = {
+  Sighting,
   index,
   show,
   create,
