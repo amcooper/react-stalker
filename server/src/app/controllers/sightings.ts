@@ -1,10 +1,15 @@
-import sightingModel from "../models/sighting";
+import Sighting from "../interfaces/sighting";
+import sightingModel = require( "../models/sighting");
 import express, { NextFunction } from "express";
 
-const index = (request: Request, response: Response, next: NextFunction): RequestHandlerParams => {
+const index = (request: Request, response: Response, next: NextFunction) => {
   sightingModel
     .index()
-    .then((res: Sighting[]) => { return response.json(res); })
+    // .then((res: Sighting[]) => { return response.json(res); })
+    .then((res: Sighting[]) => { 
+      console.log("What's happening here?", res);
+      return response.send(res);
+    })
     .catch(e => next(e));
 };
 

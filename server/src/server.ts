@@ -4,7 +4,7 @@ import express from "express";
 const app = express();
 const port = process.env.PORT;
 import morgan from "morgan";
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 import methodOverride from "method-override";
 import cors from "cors";
 import path from "path";
@@ -14,8 +14,8 @@ if (process.env.NODE_ENV !== "test") {
   app.use(morgan("combined"));
 }
 app.use(methodOverride());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 

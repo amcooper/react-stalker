@@ -1,22 +1,5 @@
 import knex from "../../config/database";
-
-interface SightingConstructor {
-  id: number,
-  celebrity: string,
-  stalker: string,
-  location: string,
-  date: Date,
-  comment?: string
-};
-
-class Sighting implements SightingConstructor {
-  id: number;
-  celebrity: string;
-  stalker: string;
-  location: string;
-  date: Date;
-  comment?: string;
-}
+import Sighting from "../interfaces/sighting";
 
 const index = () => knex("sightings").orderBy("created_at", "desc");
 
@@ -74,8 +57,7 @@ const destroy = (id: number) =>
     .where("id", id)
     .del();
 
-export = {
-  Sighting,
+export /* let sightingModel = */ {
   index,
   show,
   create,
