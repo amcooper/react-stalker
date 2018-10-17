@@ -47,13 +47,13 @@
   },
   "scripts": {
     "build-client": "cd ./client && yarn run build",
-    "dev": "yarn run serve-client & nodemon ./server/index.js",
+    "dev": "yarn run serve-client & nodemon ./server/dist/index.js",
     "test": "NODE_ENV=test npx nyc --reporter=html --reporter=text mocha ./server/dist/test",
     "precommit": "lint-staged",
     "prepush": "yarn run test",
     "postinstall": "cd ./client && yarn",
     "serve-client": "cd ./client && yarn start",
-    "start": "node server",
+    "start": "node server/dist/index.js",
     "heroku-postbuild": "yarn run build-client",
     "test-client": "cd ./client && yarn test"
   },

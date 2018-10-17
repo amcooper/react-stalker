@@ -4,6 +4,7 @@ const port = process.env.PORT;
 import express from "express";
 const app = express();
 // const port = process.env.PORT;
+import { knexObject } from "./knexfile";
 import morgan from "morgan";
 // import bodyParser from "body-parser";
 import methodOverride from "method-override";
@@ -22,6 +23,7 @@ interface Sighting {
   comment?: string
 };
 
+/*
 const knexfileData: any = {
   development: {
     client: "pg",
@@ -88,8 +90,9 @@ const knexfileData: any = {
     }
   }
 };
+*/
 
-const database = knexfileData[process.env.NODE_ENV];
+const database = knexObject[process.env.NODE_ENV];
 console.log("*****\n* ", process.env.NODE_ENV, database);
 const knex = require("knex")(database);
 
@@ -105,7 +108,7 @@ app.use(cors());
 app.use(express.static(path.resolve(__dirname, "..", "client", "public")));
 
 // app.use("/api/v1", routes);
-app.get("/sightings", (request, response, next) => {
+app.get("/api/v1/sightings", (request, response, next) => {
   return knex("sightings").orderBy("created_at", "desc")
   // .then((res: Sighting[]) => { return response.json(res); })
   .then((res: Sighting[]) => { 
@@ -115,7 +118,7 @@ app.get("/sightings", (request, response, next) => {
   .catch((e: any) => next(e));
 });
 
-app.get("/sightings/:id", (request, response, next) => {
+app.get("/api/v1/sightings/:id", (request, response, next) => {
   return knex("sightings")
   .returning("*")
   .where("id", request.params.id)
@@ -123,7 +126,7 @@ app.get("/sightings/:id", (request, response, next) => {
   .catch((e: any) => next(e));
 });
 
-app.post("/sightings", (request, response, next) => {
+app.post("/api/v1/sightings", (request, response, next) => {
   const data = request.body;
   if (!data.celebrity || !data.stalker || !data.location) {
     return response.status(422).json({msg: "The celebrity, stalker, and location fields may not be blank. The record was not saved."});
@@ -140,7 +143,7 @@ app.post("/sightings", (request, response, next) => {
   }  
 });
 
-app.put("/sightings/:id", (request, response, next) => {
+app.put("/api/v1/sightings/:id", (request, response, next) => {
   const data = request.body;
   const dataValuesArray = Object.values(data);
   if (dataValuesArray.map(value => Boolean(value)).includes(false)) {
@@ -160,7 +163,7 @@ app.put("/sightings/:id", (request, response, next) => {
   }
 });
 
-app.delete("/sightings/:id", (request, response, next) => {
+app.delete("/api/v1/sightings/:id", (request, response, next) => {
   return knex("sightings")
   .returning("*")
   .where("id", request.params.id)
