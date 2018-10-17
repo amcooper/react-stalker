@@ -125,12 +125,8 @@ app.get("/sightings/:id", (request, response, next) => {
 
 app.post("/sightings", (request, response, next) => {
   const data = request.body;
-  if (!data.celebrity || !data.stalker || !data.location || !data.date) {
-    return Promise.reject(
-      new Error(
-        "The celebrity, stalker, location, and date fields may not be blank. The record was not saved."
-      )
-    );
+  if (!data.celebrity || !data.stalker || !data.location) {
+    return response.status(422).json({msg: "The celebrity, stalker, and location fields may not be blank. The record was not saved."});
   } else {
     return knex("sightings")
       .returning("*")
@@ -138,7 +134,9 @@ app.post("/sightings", (request, response, next) => {
         ...data,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
-      });
+      })
+      .then((res: Sighting[]) => response.json(res[0]))
+      .catch((e: any) => next(e));
   }  
 });
 
