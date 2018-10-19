@@ -1,6 +1,6 @@
 import knexObject from "../knexfile";
+import knexFn from "knex";
 
 const database = knexObject[process.env.NODE_ENV];
-const knex = require("knex")(database);
 
-export default knex; 
+export default knexFn(database); 
