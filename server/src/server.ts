@@ -5,7 +5,6 @@ import methodOverride from "method-override";
 import cors from "cors";
 import path from "path";
 import errorHandler from "errorhandler";
-import knex from "./config/database";
 import routes from "./app/routes/sightings";
 
 if (process.env.NODE_ENV !== "test") {
