@@ -1,7 +1,13 @@
 // require("dotenv").config();
-const path = require("path");
+import path from "path";
+// import * as client from "knex";
+import * as Knex from "knex";
 
-module.exports = {
+interface KnexFile {
+  [key: string]: Knex.Config
+}
+
+const knexObject: KnexFile = {
   development: {
     client: "pg",
     connection: "postgres://localhost:5432/react_stalker",
@@ -67,3 +73,6 @@ module.exports = {
     }
   }
 };
+
+export default knexObject;
+
