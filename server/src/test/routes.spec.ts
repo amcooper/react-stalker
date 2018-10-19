@@ -1,10 +1,13 @@
 // process.env.NODE_ENV = "test";
 
-const { expect } = require("chai");
-const request = require("supertest");
+// const { expect } = require("chai");
+import { expect } from "chai";
+// const request = require("supertest");
+import request from "supertest";
 
-const server = require("../server");
-// const knex = require("../config/database");
+// const server = require("../server");
+import server from "../server";
+import knex from "../config/database";
 
 describe("API routes", function() {
   beforeEach("Migrate and seed the test database", async function() {
@@ -24,7 +27,7 @@ describe("API routes", function() {
   describe("GET /api/v1/sightings", function() {
     it("should return all sightings", async () => {
       const response = await request(server).get("/api/v1/sightings");
-      expect(response.statusCode).to.equal(200);
+      expect(response.status).to.equal(200);
       expect(response.body).to.be.an("array");
       expect(response.body.length).to.equal(3);
 
@@ -78,7 +81,7 @@ describe("API routes", function() {
   describe("GET /api/v1/sightings/3", function() {
     it("should return the sighting whose id is 3", async () => {
       const response = await request(server).get("/api/v1/sightings/3");
-      expect(response.statusCode).to.equal(200);
+      expect(response.status).to.equal(200);
       expect(response.body).to.be.an("object");
       expect(response.body.id).to.be.a("number");
       expect(response.body).to.have.property("celebrity");
@@ -107,9 +110,9 @@ describe("API routes", function() {
           location: "Gun Hill Rd",
           comment: "On fire"
         });
-      expect(postResponse.statusCode).to.equal(200);
+      expect(postResponse.status).to.equal(200);
       const response = await request(server).get("/api/v1/sightings");
-      expect(response.statusCode).to.equal(200);
+      expect(response.status).to.equal(200);
       expect(response.body).to.be.an("array");
       expect(response.body.length).to.equal(4);
       expect(response.body[0]).to.be.an("object");
@@ -135,7 +138,7 @@ describe("API routes", function() {
         .send({
           badProperty: "bad data"
         });
-      expect(postResponse.statusCode).to.equal(500);
+      expect(postResponse.status).to.equal(422);
       expect(postResponse.body).to.have.property("error");
     });
   });
@@ -148,9 +151,9 @@ describe("API routes", function() {
           stalker: "The Adam Cooper",
           location: "Canarsie Pier, Brooklyn, New York, USA"
         });
-      expect(putResponse.statusCode).to.equal(200);
+      expect(putResponse.status).to.equal(200);
       const response = await request(server).get("/api/v1/sightings/3");
-      expect(response.statusCode).to.equal(200);
+      expect(response.status).to.equal(200);
       expect(response.body).to.be.an("object");
       expect(response.body).to.have.property("stalker");
       expect(response.body.stalker).to.equal("The Adam Cooper");
@@ -175,7 +178,7 @@ describe("API routes", function() {
         .send({
           id: 99
         });
-      expect(putResponse.statusCode).to.equal(500);
+      expect(putResponse.status).to.equal(422);
       expect(putResponse.body).to.have.property("error");
     });
   });
@@ -185,11 +188,10 @@ describe("API routes", function() {
       const deletedSighting = await request(server).delete(
         "/api/v1/sightings/1"
       );
-      expect(deletedSighting.statusCode).to.equal(200);
-      expect(deletedSighting.body).to.be.an("array");
-      expect(deletedSighting.body.length).to.equal(1);
+      expect(deletedSighting.status).to.equal(200);
+      expect(deletedSighting.body).to.be.an("object");
       const response = await request(server).get("/api/v1/sightings");
-      expect(response.statusCode).to.equal(200);
+      expect(response.status).to.equal(200);
       expect(response.body).to.be.an("array");
       expect(response.body.length).to.equal(2);
     });
