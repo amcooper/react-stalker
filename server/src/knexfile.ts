@@ -1,18 +1,14 @@
 // require("dotenv").config();
 import path from "path";
 // import * as client from "knex";
-import client = require("knex");
+import * as Knex from "knex";
 
 interface KnexFile {
-  development: client,
-  test: client,
-  staging: client,
-  production: client,
-  [key: string]: client
+  [key: string]: Knex.Config
 }
 
-export const knexObject: KnexFile = {
-  development: client({
+const knexObject: KnexFile = {
+  development: {
     client: "pg",
     connection: "postgres://localhost:5432/react_stalker",
     pool: {
@@ -26,9 +22,9 @@ export const knexObject: KnexFile = {
     seeds: {
       directory: path.join(__dirname, "seeds", "development")
     }
-  }),
+  },
 
-  test: client({
+  test: {
     client: "pg",
     connection: "postgres://localhost:5432/react_stalker_test",
     pool: {
@@ -42,9 +38,9 @@ export const knexObject: KnexFile = {
     seeds: {
       directory: path.join(__dirname, "seeds", "test")
     }
-  }),
+  },
 
-  staging: client({
+  staging: {
     client: "pg",
     connection:
       process.env.DATABASE_URL || "postgres://localhost:5432/react_stalker",
@@ -59,9 +55,9 @@ export const knexObject: KnexFile = {
     seeds: {
       directory: path.join(__dirname, "seeds", "production")
     }
-  }),
+  },
 
-  production: client({
+  production: {
     client: "pg",
     connection: process.env.DATABASE_URL,
     pool: {
@@ -75,6 +71,8 @@ export const knexObject: KnexFile = {
     seeds: {
       directory: path.join(__dirname, "seeds", "production")
     }
-  })
+  }
 };
+
+export default knexObject;
 

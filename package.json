@@ -47,6 +47,7 @@
   },
   "scripts": {
     "build-client": "cd ./client && yarn run build",
+    "build-server": "tsc",
     "dev": "yarn run serve-client & nodemon ./server/dist/index.js",
     "test": "NODE_ENV=test npx nyc --reporter=html --reporter=text mocha ./server/dist/test",
     "precommit": "lint-staged",
