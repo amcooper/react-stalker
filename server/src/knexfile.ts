@@ -74,5 +74,5 @@ const knexObject: KnexFile = {
   }
 };
 
-export default knexObject;
-
+// export default knexObject;
+export = knexObject;
