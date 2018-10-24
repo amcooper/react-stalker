@@ -1,4 +1,6 @@
-exports.seed = function(knex, Promise) {
+import * as Knex from "knex";
+
+const seed = (knex: Knex) => {
   return knex("sightings")
     .del()
     .then(function() {
@@ -33,3 +35,5 @@ exports.seed = function(knex, Promise) {
       ]);
     });
 };
+
+export = ({seed});

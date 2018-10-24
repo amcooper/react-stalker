@@ -1,4 +1,6 @@
-exports.up = function(knex, Promise) {
+import * as Knex from "knex";
+
+const up = (knex: Knex) => {
   return knex.schema.createTableIfNotExists("sightings", table => {
     table.increments();
     table.string("celebrity");
@@ -10,6 +12,8 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+const down = (knex: Knex) => {
   return knex.schema.dropTableIfExists("sightings");
 };
+
+export = ({up, down});
