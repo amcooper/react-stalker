@@ -60,7 +60,7 @@
     "build": "yarn run build-ts && yarn run tslint && yarn run copy-static-assets",
     "debug": "yarn run build && yarn run watch-debug",
     "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn run watch-ts\" \"yarn run serve-debug\"",
-    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha server/dist/test",
+    "test": "yarn run build-ts && NODE_ENV=test nyc --reporter=html --reporter=text mocha server/dist/test",
     "precommit": "lint-staged",
     "prepush": "yarn run test",
     "build-client": "cd client && yarn run build",

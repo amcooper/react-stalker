@@ -1,4 +1,7 @@
-import React, { Component } from "react";
+/// <reference path="interfaces.d.ts" />
+
+import * as React from "react";
+import { Component } from "react"
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -10,9 +13,9 @@ import Form from "./Form";
 import Stalk from "./Stalk";
 import StalkList from "./StalkList";
 
-class App extends Component {
-  constructor() {
-    super();
+export class App extends Component<{}, IAppState> {
+  constructor(props: {}) {
+    super(props);
     this.state = {
       isEditForm: false,
       id: null,
@@ -25,14 +28,14 @@ class App extends Component {
     this.editItem = this.editItem.bind(this);
   }
 
-  resetAppState() {
+  public resetAppState() {
     this.setState({
       id: null,
       isEditForm: false
     });
   }
 
-  getSightings() {
+  public getSightings() {
     fetch("/api/v1/sightings", {
       mode: "cors"
     })
@@ -45,9 +48,9 @@ class App extends Component {
         return res.json();
       })
       .then(json => {
-        let sightings = json.map(sighting => {
+        let sightings = json.map((sighting: ISighting) => {
           let [y, mo, d, h, min] = sighting.date.split(/[-T:Z]/);
-          sighting.date = new Date(y, mo - 1, d, h, min);
+          sighting.date = new Date(Number(y), Number(mo) - 1, Number(d), Number(h), Number(min));
           return sighting;
         });
         return sightings;
@@ -58,15 +61,15 @@ class App extends Component {
       .catch(e => console.error(e.stack));
   }
 
-  handleClick(id) {
+  public handleClick(id: number) {
     this.setState({ id: id });
   }
 
-  editItem() {
+  public editItem() {
     this.setState({ isEditForm: true });
   }
 
-  deleteItem(id) {
+  public deleteItem(id: number) {
     fetch(`api/v1/sightings/${id}`, {
       method: "DELETE",
       mode: "cors"
@@ -82,13 +85,13 @@ class App extends Component {
       .catch(e => console.error(e.stack));
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.getSightings();
   }
 
-  render() {
+  public render() {
     let item = this.state.sightings.find(
-      sighting => sighting.id === this.state.id
+      (sighting: ISighting) => sighting.id === this.state.id
     );
 
     return (
@@ -109,7 +112,7 @@ class App extends Component {
                 {...props}
                 item={item}
                 onEdit={this.editItem}
-                onDelete={id => this.deleteItem(id)}
+                onDelete={(id: number) => this.deleteItem(id)}
               />
             )
           }
@@ -128,5 +131,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
