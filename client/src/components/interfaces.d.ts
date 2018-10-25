@@ -12,3 +12,13 @@ interface IAppState {
     id: number,
     sightings: ISighting[]
 }
+
+interface IStalkListProps {
+    sightings: ISighting[],
+    onClick(id: number): void
+}
+
+interface IStalkListItemProps {
+    item: ISighting,
+    onClick(): void
+}

@@ -1,8 +1,11 @@
-import React, { Component } from "react";
+/// <reference path="./interfaces.d.ts" />
+
+import * as React from "react";
+import { Component } from "react";
 import "./StalkList.css";
 import StalkListItem from "./StalkListItem";
 
-class StalkList extends Component {
+class StalkList extends Component<IStalkListProps, {}> {
   render() {
     const itemList = this.props.sightings.map(sighting => (
       <li key={sighting.id}>
