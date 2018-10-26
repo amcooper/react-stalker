@@ -3,7 +3,7 @@ interface ISighting {
     celebrity: string,
     stalker: string,
     location: string,
-    date: string
+    date: Date,
     comment: string
 }
 
@@ -21,4 +21,10 @@ interface IStalkListProps {
 interface IStalkListItemProps {
     item: ISighting,
     onClick(): void
+}
+
+interface IStalkProps {
+    item: ISighting,
+    onEdit(id: number): void,
+    onDelete(id: number): void
 }

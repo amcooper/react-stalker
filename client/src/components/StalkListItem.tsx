@@ -7,7 +7,7 @@ function StalkListItem(props: IStalkListItemProps) {
   return (
     <Link to={`/${props.item.id}`}>
       <p className="StalkListItem" onClick={() => props.onClick()}>
-        {props.item.celebrity} on {props.item.date.toDateString()}
+        {props.item.celebrity} on {props.item.date}
       </p>
     </Link>
   );
