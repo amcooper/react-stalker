@@ -1,3 +1,18 @@
+interface IFormProps {
+    resetAppState: void, // TODO: confirm
+    getSightings: void, // TODO: confirm
+    isEditForm: boolean,
+    item: ISighting // TODO: This could also be null (undefined?)
+}
+
+interface IFormState {
+    celebrity: string,
+    stalker: string,
+    location: string,
+    date: string,
+    comment: string
+}
+
 interface ISighting {
     id: number,
     celebrity: string,

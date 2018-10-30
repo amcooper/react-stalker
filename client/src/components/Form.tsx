@@ -1,8 +1,10 @@
+/// <reference path="interfaces.d.ts" />
+
 import * as React from "react";
 import { Component } from "react";
 import "./Form.css";
 
-class Form extends Component {
+export default class Form extends Component<{}, IFormState> {
   constructor(props: {}) {
     super(props);
     let date = new Date(Date.now());
@@ -140,5 +142,3 @@ class Form extends Component {
     );
   }
 }
-
-export default Form;
