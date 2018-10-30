@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import * as React from "react";
+import { Component } from "react";
 import "./Form.css";
 
 class Form extends Component {
-  constructor(props) {
+  constructor(props: {}) {
     super(props);
     let date = new Date(Date.now());
     this.state = {
