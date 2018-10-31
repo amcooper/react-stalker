@@ -99,8 +99,7 @@ export class App extends Component<{}, IAppState> {
         <Form
           resetAppState={this.resetAppState}
           getSightings={this.getSightings}
-          isEditForm={this.state.isEditForm} // TODO Refactor; this is probably spurious.
-          item={this.state.isEditForm ? item : null}
+          item={this.state.isEditForm ? item : undefined}
         />
         <Route
           path="/:id"

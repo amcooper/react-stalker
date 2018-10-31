@@ -4,8 +4,8 @@ import * as React from "react";
 import { Component } from "react";
 import "./Form.css";
 
-export default class Form extends Component<{}, IFormState> {
-  constructor(props: {}) {
+export default class Form extends Component<IFormProps, IFormState> {
+  constructor(props: IFormProps) {
     super(props);
     let date = new Date(Date.now());
     this.state = {
@@ -38,11 +38,11 @@ export default class Form extends Component<{}, IFormState> {
     event.preventDefault();
 
     let fetchURL = `/api/v1/sightings${
-      this.props.isEditForm
+      this.props.item
         ? `/${this.props.item ? this.props.item.id : ""}`
         : ""
     }`;
-    let fetchMethod = this.props.isEditForm ? "PUT" : "POST";
+    let fetchMethod = this.props.item ? "PUT" : "POST";
 
     fetch(fetchURL, {
       method: fetchMethod,
@@ -75,7 +75,7 @@ export default class Form extends Component<{}, IFormState> {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: IFormProps) {
     if (nextProps.item) {
       this.setState({
         celebrity: nextProps.item.celebrity || "",
@@ -136,7 +136,7 @@ export default class Form extends Component<{}, IFormState> {
         </div>
         <input
           type="submit"
-          value={this.props.isEditForm ? "Update" : "Create"}
+          value={this.props.item ? "Update" : "Create"}
         />
       </form>
     );
