@@ -1,8 +1,11 @@
-import React, { Component } from "react";
+/// <reference path="interfaces.d.ts" />
+
+import * as React from "react";
+import { Component } from "react";
 import "./Form.css";
 
-class Form extends Component {
-  constructor(props) {
+export default class Form extends Component<IFormProps, IFormState> {
+  constructor(props: IFormProps) {
     super(props);
     let date = new Date(Date.now());
     this.state = {
@@ -35,11 +38,11 @@ class Form extends Component {
     event.preventDefault();
 
     let fetchURL = `/api/v1/sightings${
-      this.props.isEditForm
+      this.props.item
         ? `/${this.props.item ? this.props.item.id : ""}`
         : ""
     }`;
-    let fetchMethod = this.props.isEditForm ? "PUT" : "POST";
+    let fetchMethod = this.props.item ? "PUT" : "POST";
 
     fetch(fetchURL, {
       method: fetchMethod,
@@ -72,7 +75,7 @@ class Form extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: IFormProps) {
     if (nextProps.item) {
       this.setState({
         celebrity: nextProps.item.celebrity || "",
@@ -133,11 +136,9 @@ class Form extends Component {
         </div>
         <input
           type="submit"
-          value={this.props.isEditForm ? "Update" : "Create"}
+          value={this.props.item ? "Update" : "Create"}
         />
       </form>
     );
   }
 }
-
-export default Form;

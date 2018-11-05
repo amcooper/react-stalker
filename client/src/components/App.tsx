@@ -13,6 +13,16 @@ import Form from "./Form";
 import Stalk from "./Stalk";
 import StalkList from "./StalkList";
 
+declare global {
+  interface Window {
+    fetch: (url: string, options?: {}) => Promise<any>
+  }
+}
+
+// Wow this is hacky
+let window: Window;
+const fetch = window.fetch;
+
 export class App extends Component<{}, IAppState> {
   constructor(props: {}) {
     super(props);
@@ -49,7 +59,7 @@ export class App extends Component<{}, IAppState> {
       })
       .then(json => {
         let sightings = json.map((sighting: ISighting) => {
-          let [y, mo, d, h, min] = sighting.date.split(/[-T:Z]/);
+          let [y, mo, d, h, min] = sighting.date.toDateString().split(/[-T:Z]/);
           sighting.date = new Date(Number(y), Number(mo) - 1, Number(d), Number(h), Number(min));
           return sighting;
         });
@@ -99,8 +109,7 @@ export class App extends Component<{}, IAppState> {
         <Form
           resetAppState={this.resetAppState}
           getSightings={this.getSightings}
-          isEditForm={this.state.isEditForm} // TODO Refactor; this is probably spurious.
-          item={this.state.isEditForm ? item : null}
+          item={this.state.isEditForm ? item : undefined}
         />
         <Route
           path="/:id"
