@@ -1,7 +1,7 @@
 /// <reference path="interfaces.d.ts" />
 
 import * as React from "react";
-import { Component } from "react"
+import { Component } from "react";
 import "./App.css";
 import {
   BrowserRouter as Router,
