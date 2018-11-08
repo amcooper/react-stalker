@@ -13,6 +13,7 @@ import Form from "./Form";
 import Stalk from "./Stalk";
 import StalkList from "./StalkList";
 
+/*
 declare global {
   interface Window {
     fetch: (url: string, options?: {}) => Promise<any>
@@ -22,6 +23,7 @@ declare global {
 // Wow this is hacky
 let window: Window;
 const fetch = window.fetch;
+*/
 
 export class App extends Component<{}, IAppState> {
   constructor(props: {}) {
