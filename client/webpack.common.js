@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: "./src/components/index.js"
+    app: "./src/components/index.tsx"
   },
   plugins: [
     new CleanWebpackPlugin(["public"]),
@@ -15,7 +15,9 @@ module.exports = {
     path: path.resolve(__dirname, "dist")
   },
   // devtool: "source-map",
-  resolve: [".ts", ".tsx", ".js", ".json"],
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
   module: {
     rules: [
       {
@@ -24,7 +26,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        pre: "enforce",
+        enforce: "pre",
         use: ["source-map-loader"]
       },
       {
@@ -37,9 +39,5 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       }
     ]
-  },
-  externals: {
-    react: "React",
-    "react-dom": "ReactDOM"
   }
 };
