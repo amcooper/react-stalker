@@ -1,7 +1,7 @@
 /// <reference path="interfaces.d.ts" />
 
 import * as React from "react";
-import { Component } from "react";
+import { Component, FormEvent } from "react";
 import "./Form.css";
 
 export default class Form extends Component<IFormProps, IFormState> {
@@ -20,14 +20,14 @@ export default class Form extends Component<IFormProps, IFormState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+  public handleChange(event: FormEvent<HTMLInputElement>) {
+    const currentTarget = event.currentTarget;
+    const value = currentTarget.value;
+    const name = currentTarget.name;
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
+  public handleSubmit(event: FormEvent<HTMLElement>) {
     let data = new URLSearchParams();
     data.append("celebrity", this.state.celebrity);
     data.append("stalker", this.state.stalker);
@@ -64,7 +64,7 @@ export default class Form extends Component<IFormProps, IFormState> {
       });
   }
 
-  resetForm() {
+  public resetForm() {
     let date = new Date(Date.now());
     this.setState({
       celebrity: "",
@@ -75,7 +75,7 @@ export default class Form extends Component<IFormProps, IFormState> {
     });
   }
 
-  componentWillReceiveProps(nextProps: IFormProps) {
+  public componentWillReceiveProps(nextProps: IFormProps) {
     if (nextProps.item) {
       this.setState({
         celebrity: nextProps.item.celebrity || "",
@@ -87,7 +87,7 @@ export default class Form extends Component<IFormProps, IFormState> {
     }
   }
 
-  render() {
+  public render() {
     return (
       <form id="input-form" onSubmit={this.handleSubmit}>
         <div>
