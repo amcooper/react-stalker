@@ -20,7 +20,7 @@ export default class Form extends Component<IFormProps, IFormState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  public handleChange(event: FormEvent<HTMLInputElement>) {
+  public handleChange(event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const currentTarget = event.currentTarget;
     const value = currentTarget.value;
     const name = currentTarget.name;
