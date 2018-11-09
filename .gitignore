@@ -7,3 +7,4 @@ node_modules
 coverage
 server/dist
 .vscode/
+client/dist

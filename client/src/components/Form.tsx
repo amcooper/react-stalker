@@ -4,6 +4,13 @@ import * as React from "react";
 import { Component, FormEvent } from "react";
 import "./Form.css";
 
+const updateState = <T extends string>(key: keyof IFormState, value: T) => (
+  prevState: IFormState
+): IFormState => ({
+  ...prevState,
+  [key]: value
+});
+
 export default class Form extends Component<IFormProps, IFormState> {
   constructor(props: IFormProps) {
     super(props);
@@ -20,11 +27,12 @@ export default class Form extends Component<IFormProps, IFormState> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  public handleChange(event: FormEvent<HTMLInputElement>) {
+  public handleChange(event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const currentTarget = event.currentTarget;
     const value = currentTarget.value;
     const name = currentTarget.name;
-    this.setState({ [name]: value });
+    const keyName: keyof IFormState = name as keyof IFormState;
+    this.setState(updateState(keyName, value));
   }
 
   public handleSubmit(event: FormEvent<HTMLElement>) {
