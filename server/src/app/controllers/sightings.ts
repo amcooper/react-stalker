@@ -3,24 +3,24 @@ import { NextFunction } from "express-serve-static-core";
 import knex from "../../config/database";
 
 interface Sighting {
-  id: number,
-  celebrity: string,
-  stalker: string,
-  location: string,
-  date: Date,
-  comment?: string
-};
-    
+  id: number;
+  celebrity: string;
+  stalker: string;
+  location: string;
+  date: Date;
+  comment?: string;
+}
+
 const index = (request: Request, response: Response, next: NextFunction) =>
   knex("sightings").orderBy("created_at", "desc")
     .then((res: Sighting[]) => response.json(res))
     .catch((e: any) => next(e));
-  
-const show = (request: Request, response: Response, next: NextFunction) => 
+
+const show = (request: Request, response: Response, next: NextFunction) =>
   knex("sightings").where("id", request.params.id)
     .then((res: Sighting[]) => response.json(res[0]))
     .catch((e: any) => next(e));
-  
+
 const create = (request: Request, response: Response, next: NextFunction) => {
   const data = request.body;
   if (!data.celebrity || !data.stalker || !data.location) {
@@ -35,9 +35,9 @@ const create = (request: Request, response: Response, next: NextFunction) => {
       })
       .then((res: Sighting[]) => response.json(res[0]))
       .catch((e: any) => next(e));
-  } 
-}
-  
+  }
+};
+
 const update = (request: Request, response: Response, next: NextFunction) => {
   const data = request.body;
   const dataValuesArray = Object.values(data);
@@ -56,11 +56,11 @@ const update = (request: Request, response: Response, next: NextFunction) => {
       .then((res: Sighting[]) => response.json(res[0]))
       .catch((e: any) => next(e));
   }
-}
-  
-const destroy = (request: Request, response: Response, next: NextFunction) => 
+};
+
+const destroy = (request: Request, response: Response, next: NextFunction) =>
   knex("sightings").returning("*").where("id", request.params.id).del()
     .then((res: Sighting[]) => response.json(res[0]))
     .catch((e: any) => next(e));
 
-export default { index, show, create, update, destroy }
+export default { index, show, create, update, destroy };

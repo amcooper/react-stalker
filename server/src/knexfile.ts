@@ -4,7 +4,7 @@ import path from "path";
 import * as Knex from "knex";
 
 interface KnexFile {
-  [key: string]: Knex.Config
+  [key: string]: Knex.Config;
 }
 
 const knexObject: KnexFile = {
