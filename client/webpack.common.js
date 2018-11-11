@@ -7,7 +7,7 @@ module.exports = {
     app: "./src/components/index.tsx"
   },
   plugins: [
-    new CleanWebpackPlugin(["public"]),
+    new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({ template: "index.html" })
   ],
   output: {

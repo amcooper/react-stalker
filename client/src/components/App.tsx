@@ -59,7 +59,8 @@ export class App extends Component<{}, IAppState> {
 
         return res.json();
       })
-      .then(json => {
+      /*
+      .then((json: ISighting[]) => {
         let sightings = json.map((sighting: ISighting) => {
           console.log("*** DATE ***");
           console.log(typeof sighting.date);
@@ -69,6 +70,7 @@ export class App extends Component<{}, IAppState> {
         });
         return sightings;
       })
+      */
       .then(sightings => {
         this.setState({ sightings: sightings });
       })

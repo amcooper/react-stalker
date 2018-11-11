@@ -16,13 +16,13 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-app.use(express.static(path.resolve(__dirname, "..", "client", "public")));
+app.use(express.static(path.resolve(__dirname, "..", "client", "dist")));
 
 app.use("/api/v1", routes);
 
 app.get("*", (request, response) => {
   response.sendFile(
-    path.resolve(__dirname, "..", "client", "public", "index.html")
+    path.resolve(__dirname, "..", "client", "dist", "index.html")
   );
 });
 
