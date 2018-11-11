@@ -61,6 +61,8 @@ export class App extends Component<{}, IAppState> {
       })
       .then(json => {
         let sightings = json.map((sighting: ISighting) => {
+          console.log("*** DATE ***");
+          console.log(typeof sighting.date);
           let [y, mo, d, h, min] = sighting.date.toDateString().split(/[-T:Z]/);
           sighting.date = new Date(Number(y), Number(mo) - 1, Number(d), Number(h), Number(min));
           return sighting;
