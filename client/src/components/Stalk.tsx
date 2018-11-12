@@ -9,11 +9,9 @@ function Stalk(props: IStalkProps) {
       <p>
         <button onClick={() => props.onEdit(props.item.id)}>edit</button>
         <button onClick={() => props.onDelete(props.item.id)}>delete</button>
-        {props.item.stalker} spotted {props.item.celebrity}
-        {" on "}
-        {props.item.date} in {props.item.location}: &quot;
-        {props.item.comment}
-        &quot;
+        {`${props.item.stalker} spotted ${props.item.celebrity}
+         on ${props.item.date} in ${props.item.location}: 
+        "${props.item.comment}"`}
       </p>
     </div>
   );

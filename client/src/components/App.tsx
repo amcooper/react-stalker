@@ -13,18 +13,6 @@ import Form from "./Form";
 import Stalk from "./Stalk";
 import StalkList from "./StalkList";
 
-/*
-declare global {
-  interface Window {
-    fetch: (url: string, options?: {}) => Promise<any>
-  }
-}
-
-// Wow this is hacky
-let window: Window;
-const fetch = window.fetch;
-*/
-
 export class App extends Component<{}, IAppState> {
   constructor(props: {}) {
     super(props);
@@ -59,20 +47,8 @@ export class App extends Component<{}, IAppState> {
 
         return res.json();
       })
-      /*
-      .then((json: any) => {
-        console.log(json);
-        let sightings = json.map((sighting: any) => {
-          // let [y, mo, d, h, min] = sighting.date.toDateString().split(/[-T:Z]/);
-          sighting.date = new Date(sighting.date);
-          return sighting;
-        });
-        return sightings;
-      })
-      */
       .then((rawSightings: IRawSighting[]) => {
         const sightings: ISighting[] = rawSightings.map((item: IRawSighting) => ({ ...item, date: new Date(item.date)}));
-        console.log(Object.prototype.toString.call(sightings[0].date));
         this.setState({ sightings: sightings });
       })
       .catch(e => { console.error(e.stack); });
