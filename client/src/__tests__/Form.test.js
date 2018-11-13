@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { mount } from "enzyme";
 import fetchMock from "fetch-mock";
-import Form from "../src/Form";
+import Form from "../components/Form";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("Form component", () => {

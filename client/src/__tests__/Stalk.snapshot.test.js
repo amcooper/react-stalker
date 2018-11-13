@@ -1,5 +1,5 @@
 import React from "react";
-import Stalk from "../src/Stalk";
+import Stalk from "../components/Stalk";
 import renderer from "react-test-renderer";
 import { stalkList } from "../fixtures/fixtures";
 

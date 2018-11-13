@@ -1,7 +1,9 @@
 import React from "react";
-import Form from "../src/Form";
+import Form from "../components/Form";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
+// import { create } from "react-test-renderer";
+// import * as renderer from "react-test-renderer";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("Form component renders the form correctly", () => {

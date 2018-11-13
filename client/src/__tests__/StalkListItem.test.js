@@ -1,6 +1,6 @@
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
-import StalkListItem from "../src/StalkListItem";
+import StalkListItem from "../components/StalkListItem";
 import { mount } from "enzyme";
 import { stalkList } from "../fixtures/fixtures";
 

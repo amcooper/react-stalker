@@ -1,5 +1,5 @@
 import React from "react";
-import StalkList from "../src/StalkList";
+import StalkList from "../components/StalkList";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { stalkList } from "../fixtures/fixtures";
