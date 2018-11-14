@@ -125,7 +125,7 @@ module.exports = {
 
   // The path to a module that runs some code to configure or set up the testing framework before each test
   // setupTestFrameworkScriptFile: null,
-  setupTestFrameworkScriptFile: "<rootDir>/testSetup.js",
+  setupTestFrameworkScriptFile: "<rootDir>/testSetup.ts",
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
