@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Stalk from "../components/Stalk.js";
+import Stalk from "../components/Stalk";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("Stalk component", () => {

@@ -1,12 +1,12 @@
 import React from "react";
 import StalkList from "../components/StalkList";
 import { MemoryRouter } from "react-router-dom";
-import renderer from "react-test-renderer";
+import { create } from "react-test-renderer";
 import { stalkList } from "../fixtures/fixtures";
 
 describe("StalkList component renders the stalk list correctly", () => {
   it("renders correctly", () => {
-    const rendered = renderer.create(
+    const rendered = create(
       <MemoryRouter>
         <StalkList sightings={stalkList} />
       </MemoryRouter>
