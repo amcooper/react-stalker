@@ -1,6 +1,7 @@
 interface IFormProps {
     resetAppState(): void, // TODO: confirm
     getSightings(): void, // TODO: confirm
+    isEditForm: boolean,
     item: ISighting | undefined // TODO: This could also be null (undefined?)
 }
 
