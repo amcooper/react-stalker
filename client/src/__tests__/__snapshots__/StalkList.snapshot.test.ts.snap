@@ -13,9 +13,7 @@ exports[`StalkList component renders the stalk list correctly renders correctly 
         className="StalkListItem"
         onClick={[Function]}
       >
-        Rosie Perez
-         on 
-        Mon Apr 23 2018
+        Rosie Perez on Mon Apr 23 2018
       </p>
     </a>
   </li>
@@ -28,9 +26,7 @@ exports[`StalkList component renders the stalk list correctly renders correctly 
         className="StalkListItem"
         onClick={[Function]}
       >
-        Angela Bassett
-         on 
-        Sat Mar 24 2018
+        Angela Bassett on Sat Mar 24 2018
       </p>
     </a>
   </li>
@@ -43,9 +39,7 @@ exports[`StalkList component renders the stalk list correctly renders correctly 
         className="StalkListItem"
         onClick={[Function]}
       >
-        Greg Luzinski
-         on 
-        Sun Feb 25 2018
+        Greg Luzinski on Sun Feb 25 2018
       </p>
     </a>
   </li>

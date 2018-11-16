@@ -7,7 +7,7 @@
         "lib": ["es6", "dom"],
         "target": "es5",
         "sourceMap": true,
-        "jsx": "react"
+        "jsx": "react",
     },
     "include": [
         "./src/**/*"

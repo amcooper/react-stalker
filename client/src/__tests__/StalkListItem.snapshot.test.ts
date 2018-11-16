@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import StalkListItem from "../components/StalkListItem";
 import { MemoryRouter } from "react-router-dom";
 import { create } from "react-test-renderer";
@@ -8,11 +8,7 @@ const testStalk = stalkList[0];
 
 describe("StalkListItem component renders a stalk list item correctly", () => {
   it("renders correctly", () => {
-    const rendered = create(
-      <MemoryRouter>
-        <StalkListItem item={testStalk} />
-      </MemoryRouter>
-    );
+    const rendered = create(React.createElement(MemoryRouter, null, React.createElement(StalkListItem, {item: testStalk})));
 
     expect(rendered.toJSON()).toMatchSnapshot();
   });

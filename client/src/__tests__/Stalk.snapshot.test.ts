@@ -7,7 +7,7 @@ const testStalk = stalkList[0];
 
 describe("Stalk component renders the stalk correctly", () => {
   it("renders correctly", () => {
-    const rendered = create(<Stalk item={testStalk} />);
+    const rendered = create(React.createElement(Stalk, {item: testStalk}));
 
     expect(rendered.toJSON()).toMatchSnapshot();
   });

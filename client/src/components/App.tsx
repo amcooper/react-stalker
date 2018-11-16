@@ -92,6 +92,7 @@ export class App extends Component<{}, IAppState> {
         <Form
           resetAppState={this.resetAppState}
           getSightings={this.getSightings}
+          isEditForm={this.state.isEditForm}
           item={this.state.isEditForm ? item : undefined}
         />
         <Route

@@ -31,7 +31,7 @@ export default class Form extends Component<IFormProps, IFormState> {
     const currentTarget = event.currentTarget;
     const value = currentTarget.value;
     const name = currentTarget.name;
-    const keyName: keyof IFormState = name as keyof IFormState;
+    const keyName = name as keyof IFormState;
     this.setState(updateState(keyName, value));
   }
 

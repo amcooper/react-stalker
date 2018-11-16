@@ -15,16 +15,9 @@ exports[`Stalk component renders the stalk correctly renders correctly 1`] = `
     >
       delete
     </button>
-    Terrell Devereaux
-     spotted 
-    Rosie Perez
-     on 
-    Mon Apr 23 2018
-     in 
-    Vinegar Hill
-    : "
-    Holla
-    "
+    Terrell Devereaux spotted Rosie Perez
+         on Mon Apr 23 2018 20:00:00 GMT-0400 (Eastern Daylight Time) in Vinegar Hill: 
+        "Holla"
   </p>
 </div>
 `;

@@ -9,9 +9,7 @@ exports[`StalkListItem component renders a stalk list item correctly renders cor
     className="StalkListItem"
     onClick={[Function]}
   >
-    Rosie Perez
-     on 
-    Mon Apr 23 2018
+    Rosie Perez on Mon Apr 23 2018
   </p>
 </a>
 `;
