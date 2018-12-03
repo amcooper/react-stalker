@@ -8,4 +8,4 @@ The _stable_ branch has been deployed to https://react-stalker.herokuapp.com/. T
 
 Routing is a little broken.
 
-As of 2018-11-16, this project is abandoned in favor of a blogging application, [canadian-spy](https://github.com/amcooper/canadian-spy), which has the same goals.
+As of 2018-11-16, this project is abandoned in favor of a blogging application, [botwe-the-spy](https://github.com/amcooper/botwe-the-spy), which has the same goals.
